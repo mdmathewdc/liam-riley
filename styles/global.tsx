@@ -5,8 +5,14 @@ export const GlobalStyles = createGlobalStyle`
 	:root {
 		--colour-white: ${theme.colours.white};
 		--colour-black: ${theme.colours.black};
-		--colour-system-white-50: ${theme.colours.systemWhite.grey50};
-		--colour-system-black-50: ${theme.colours.systemBlack.grey50};
+		--colour-dark-blue: ${theme.colours.darkBlue};
+		--colour-light-blue: ${theme.colours.lightBlue};
+		--colour-dark-green: ${theme.colours.darkGreen};
+		--colour-light-green: ${theme.colours.lightGreen};
+		--colour-dark-yellow: ${theme.colours.darkYellow};
+		--colour-light-yellow: ${theme.colours.lightYellow};
+		--colour-dark: ${theme.colours.darkYellow};
+		--colour-light: ${theme.colours.lightYellow};
 		--font-default: ${theme.fonts.default};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
@@ -32,8 +38,8 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	::selection {
-		background-color: red;
-		color: black;
+		background-color: var(--colour-dark);
+		color: var(--colour-light);
 	}
 
 	html {
@@ -87,68 +93,68 @@ export const GlobalStyles = createGlobalStyle`
 	h1,
 	.type-h1 {
 		font-size: ${theme.size.h1};
-		line-height: 2.813rem;
+		line-height: 4.313rem;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait}
 		{
 			font-size: ${theme.sizeTablet.h1};
+			line-height: 2.75rem;
 		}
 
 		@media ${theme.mediaBreakpoints.mobile}
 		{
 			font-size: ${theme.sizeMobile.h1};
-			line-height: 2.125rem;
 		}
 	}
 
 	h2,
 	.type-h2 {
 		font-size: ${theme.size.h2};
-		line-height: 2.25rem;
+		line-height: 5.063rem;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait}
 		{
 			font-size: ${theme.sizeTablet.h2};
+			line-height: 2.25rem;
 		}
 
 		@media ${theme.mediaBreakpoints.mobile}
 		{
 			font-size: ${theme.sizeMobile.h2};
-			line-height: 1.75rem;
 		}
 	}
 
 	h3,
 	.type-h3 {
 		font-size: ${theme.size.h3};
-		line-height: 1.938rem;
+		line-height: 2.5rem;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait}
 		{
 			font-size: ${theme.sizeTablet.h3};
+			line-height: 1.875rem;
 		}
 
 		@media ${theme.mediaBreakpoints.mobile}
 		{
 			font-size: ${theme.sizeMobile.h3};
-			line-height: 1.563rem;
 		}
 	}
 
 	h4,
 	.type-h4 {
 		font-size: ${theme.size.h4};
-		line-height: 1.563rem;
+		line-height: 2.5rem;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait}
 		{
 			font-size: ${theme.sizeTablet.h4};
+			line-height: 1.875rem;
 		}
 
 		@media ${theme.mediaBreakpoints.mobile}
 		{
 			font-size: ${theme.sizeMobile.h4};
-			line-height: 1.375rem;
 		}
 	}
 
@@ -158,13 +164,22 @@ export const GlobalStyles = createGlobalStyle`
 	button,
 	div {
 		font-size: ${theme.size.body};
-		line-height: 1.938rem;
+		line-height: 1.563rem;
 
 		@media ${theme.mediaBreakpoints.mobile}
 		{
 			font-size: ${theme.sizeMobile.body};
-			line-height: 1.75rem;
+			line-height: 1.563rem;
 		}
+	}
+
+	.type-small {
+		font-size: ${theme.size.small};
+	}
+
+	.type-label {
+		font-size: ${theme.size.label};
+		line-height: 1.125rem;
 	}
 
 	.view-element-fade-in
