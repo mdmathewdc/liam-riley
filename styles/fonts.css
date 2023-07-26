@@ -1,5 +1,5 @@
 @font-face {
-	font-family: 'default';
-	src: url('/fonts/gramatika-regular.woff2') format('woff2'), url('/fonts/gramatika-regular.woff') format('woff');
+	font-family: 'gramatika';
+	src: url('/fonts/gramatika-regular.woff2') format('woff2'), url('/fonts/gramatika-regular.woff') format('woff'), url('/fonts/gramatika-regular.ttf') format('truetype');
 	font-display: swap;
 }

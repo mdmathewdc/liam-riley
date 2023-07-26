@@ -11,8 +11,8 @@ export const GlobalStyles = createGlobalStyle`
 		--colour-light-green: ${theme.colours.lightGreen};
 		--colour-dark-yellow: ${theme.colours.darkYellow};
 		--colour-light-yellow: ${theme.colours.lightYellow};
-		--colour-dark: ${theme.colours.darkYellow};
-		--colour-light: ${theme.colours.lightYellow};
+		/* --colour-dark: ${theme.colours.darkYellow};
+		--colour-light: ${theme.colours.lightYellow}; */
 		--font-default: ${theme.fonts.default};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
@@ -35,6 +35,7 @@ export const GlobalStyles = createGlobalStyle`
 		border-radius: 0;
 		box-shadow: none;
 		font-weight: 100;
+		font-family: var(--font-default);
 	}
 
 	::selection {
@@ -44,8 +45,10 @@ export const GlobalStyles = createGlobalStyle`
 
 	html {
 		scroll-behavior: smooth;
-		background: ${theme.colours.white};
+		background: var(--colour-white);
+		color: var(--colour-dark);
 		font-size: 16px;
+		min-height: 500vh;
 
 		&.no-scroll {
 			overflow-y: hidden;
@@ -66,8 +69,7 @@ export const GlobalStyles = createGlobalStyle`
 	button,
 	label,
 	body {
-		font-family: var(--font-default);
-		color: var(--colour-black);
+		color: var(--colour-dark);
 		line-height: 1.4;
 	}
 
@@ -220,6 +222,12 @@ export const GlobalStyles = createGlobalStyle`
 			opacity: 1;
 			transform: scale(1);
 		}
+	}
+
+	mux-player {
+		--media-object-fit: cover;
+		--media-object-position: center;
+		--controls: none;
 	}
 
 	.performance {

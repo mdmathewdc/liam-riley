@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `;
 
 const LayoutWrapper = (props: Props) => (
-	<Wrapper className="inner-wrapper">{props.children}</Wrapper>
+	<Wrapper className="layout-wrapper">{props.children}</Wrapper>
 );
 
 export default LayoutWrapper;

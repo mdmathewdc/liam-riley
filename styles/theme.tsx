@@ -10,7 +10,7 @@ export const theme = {
 		lightYellow: '#FAF1DC',
 	},
 	fonts: {
-		default: 'default',
+		default: 'gramatika',
 	},
 	size: {
 		label: '1rem',

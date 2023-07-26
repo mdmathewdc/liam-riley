@@ -29,3 +29,43 @@ export type Transitions = {
 		}
 	}
 };
+
+export type VideoType = {
+	asset: {
+		playbackId: string;
+	}
+}
+
+export type ImageType = {
+	asset: {
+		url: string;
+	}
+};
+
+export type ColorType = {
+	hex: string;
+};
+
+export type SiteSettingsType = {
+	linkedInUrl: string;
+	aoc: string;
+	homePageParagraphThree: string;
+	easterEggImages: [
+		ImageType
+	]
+	projectsTitle: string;
+	vimeoUrl: string;
+	phone: string;
+	homePageTitle: string;
+	seoDescription: string;
+	projectsParagraph: string;
+	homePageParagraphTwo: string;
+	homePageParagraphOne: string;
+	easterEggColors: ColorType[];
+	contactTitle: string;
+	email: string;
+	instagramUrl: string;
+	easterEggText: string;
+	profileVid: VideoType;
+	showreelVid: VideoType;
+}

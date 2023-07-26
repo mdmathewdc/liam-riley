@@ -16,7 +16,7 @@ const pageTransitionVariants: Transitions = {
 };
 
 type Props = {
-	Component: any; // TO BE UPDATED
+	Component: any;
 	pageProps: {};
 };
 
@@ -27,6 +27,7 @@ const App = (props: Props) => {
 	} = props;
 
 	const [hasVisited, setHasVisited] = useState<boolean>(false);
+	const [lightColour, setLightColour] = useState("#FFF");
 
 	const router= useRouter();
 	const routerEvents = router.events;
@@ -44,6 +45,30 @@ const App = (props: Props) => {
 			setHasVisited(true);
 		}
 
+		const random = Math.floor(Math.random() * 3);
+		const lightColors = [
+			'#DCE6E8',
+			'#FAF1DC',
+			'#EEF2E8'
+		];
+		const darkColors = [
+			'#2B2E2E',
+			'#2E2D29',
+			'#2E2E2C'
+		];
+
+		// set the variable to the root html element
+		const root = document.documentElement;
+
+		const lightColour = lightColors[random];
+		const darkColour = darkColors[random];
+
+		// set the property values
+		root.style.setProperty('--colour-light', lightColour);
+		root.style.setProperty('--colour-dark', darkColour);
+
+		setLightColour(lightColour);
+
 		const timer = setTimeout(() => {
 			Cookies.set('visited', 'true', { expires: 1, path: '' });
 		}, 5000);
@@ -57,7 +82,7 @@ const App = (props: Props) => {
 		<>
 			<GlobalStyles />
 			<ThemeProvider theme={theme}>
-				<Layout>
+				<Layout hasVisited={hasVisited}>
 					<AnimatePresence
 						mode="wait"
 						onExitComplete={() => handleExitComplete()}
@@ -66,6 +91,8 @@ const App = (props: Props) => {
 							{...pageProps}
 							key={router.asPath}
 							pageTransitionVariants={pageTransitionVariants}
+							hasVisited={hasVisited}
+							lightColour={lightColour}
 						/>
 					</AnimatePresence>
 				</Layout>

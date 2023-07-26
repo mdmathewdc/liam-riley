@@ -17,6 +17,6 @@ const Grid = styled.div`
 	}
 `;
 
-const LayoutGrid = (props: Props) => <Grid className="grid">{props.children}</Grid>;
+const LayoutGrid = (props: Props) => <Grid className="layout-grid">{props.children}</Grid>;
 
 export default LayoutGrid;
