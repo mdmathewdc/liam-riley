@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
-import { ReactNode } from 'react';
-import Acknowledgement from '../blocks/Acknowledgement';
+import { ReactNode, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Menu from './Menu';
 
 const Main = styled.main``;
 
@@ -17,10 +18,33 @@ const Layout = (props: Props) => {
 		hasVisited
 	} = props;
 
+	const [menuIsActive, setMenuIsActive] = useState(false);
+
+	const router = useRouter();
+
+	useEffect(() => {
+		if (menuIsActive) {
+			document.documentElement.classList.add('no-scroll');
+		} else {
+			document.documentElement.classList.remove('no-scroll');
+		}
+	}, [menuIsActive]);
+
+	useEffect(() => {
+		setMenuIsActive(false);
+	}, [router.pathname]);
+
 	return (
 		<>
-			<Header />
-			<Main hasVisited={hasVisited}>{children}</Main>
+			<Header
+				menuIsActive={menuIsActive}
+				setMenuIsActive={setMenuIsActive}
+			/>
+			<Menu
+				menuIsActive={menuIsActive}
+				setMenuIsActive={setMenuIsActive}
+			/>
+			<Main>{children}</Main>
 			<Footer />
 		</>
 	);

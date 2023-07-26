@@ -39,6 +39,7 @@ const MobileIntroMuxWrapper = styled.div`
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		display: block;
+		margin-top: var(--header-h);
 	}
 `;
 

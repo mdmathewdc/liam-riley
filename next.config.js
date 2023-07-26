@@ -1,3 +1,6 @@
+const createNextPluginPreval = require('next-plugin-preval/config');
+const withNextPluginPreval = createNextPluginPreval();
+
 const nextConfig = {
 	reactStrictMode: true,
 	eslint: {
@@ -18,4 +21,4 @@ const nextConfig = {
 	},
 };
 
-module.exports = nextConfig;
+module.exports = withNextPluginPreval(nextConfig);

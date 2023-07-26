@@ -3,6 +3,7 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 import pxToRem from '../../../utils/pxToRem';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import useViewportWidth from '../../../hooks/useViewportWidth';
 
 const AcknowledgementWrapper = styled(motion.div)`
 	position: fixed;
@@ -68,8 +69,19 @@ const Acknowledgement = (props: Props) => {
 		content
 	} = props;
 
-	// const [isActive, setIsActive] = useState(!hasVisited);
 	const [isActive, setIsActive] = useState(true);
+	const [isMobile, setIsMobile] = useState(false);
+
+	const viewportWidth = useViewportWidth();
+
+	useEffect(() => {
+		if (viewportWidth === 'mobile' || viewportWidth === 'tabletPortrait') {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+	}, [viewportWidth]);
+	
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -94,11 +106,12 @@ const Acknowledgement = (props: Props) => {
 						initial='hidden'
 						animate='visible'
 						exit='hidden'
+						onClick={() => setIsActive(false)}
 					>
 						<Background />
 						<ContentWrapper>
 							<LayoutWrapper>
-								<Hint>Scroll to continue</Hint>
+								<Hint>{isMobile ? 'Tap' : 'Scroll'} to continue</Hint>
 								{content && (
 									<Content>{content}</Content>
 								)}
