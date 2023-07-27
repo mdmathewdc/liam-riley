@@ -42,7 +42,6 @@ const Layout = (props: Props) => {
 			/>
 			<Menu
 				menuIsActive={menuIsActive}
-				setMenuIsActive={setMenuIsActive}
 			/>
 			<Main>{children}</Main>
 			<Footer />

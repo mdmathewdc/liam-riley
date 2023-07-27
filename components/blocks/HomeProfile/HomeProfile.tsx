@@ -5,6 +5,7 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
 import MuxPlayer from '@mux/mux-player-react';
 import pxToRem from '../../../utils/pxToRem';
+import { useInView } from 'react-intersection-observer';
 
 type Props = {
 	paragraphOne: string;
@@ -103,6 +104,30 @@ const HomeProfile = (props: Props) => {
 		lightColour
 	} = props;
 
+	const { ref: ref1, inView: inView1 } = useInView({
+		triggerOnce: true,
+		threshold: 0.2,
+		rootMargin: '-50px'
+	});
+
+	const { ref: ref2, inView: inView2 } = useInView({
+		triggerOnce: true,
+		threshold: 0.2,
+		rootMargin: '-50px'
+	});
+
+	const { ref: ref3, inView: inView3 } = useInView({
+		triggerOnce: true,
+		threshold: 0.2,
+		rootMargin: '-50px'
+	});
+
+	const { ref: ref4, inView: inView4 } = useInView({
+		triggerOnce: true,
+		threshold: 0.2,
+		rootMargin: '-50px'
+	});
+
 	return (
 		<HomeProfileWrapper>
 			<IntroAnimation
@@ -157,10 +182,22 @@ const HomeProfile = (props: Props) => {
 							</MobileIntroTitle>
 						)}
 						{paragraphOne && (
-							<Heading>{paragraphOne}</Heading>
+							<Heading
+								className={`view-element-bottom-top ${
+									inView1 ? 'view-element-bottom-top--in-view' : ''
+								}`}
+								ref={ref1}
+							>
+								{paragraphOne}
+							</Heading>
 						)}
 						{profileVideo?.asset?.playbackId && (
-							<ProfileVideoWrapper>
+							<ProfileVideoWrapper
+								className={`view-element-bottom-top ${
+									inView2 ? 'view-element-bottom-top--in-view' : ''
+								}`}
+								ref={ref2}
+							>
 								<MuxPlayer
 									streamType="on-demand"
 									playbackId={profileVideo.asset.playbackId}
@@ -171,10 +208,24 @@ const HomeProfile = (props: Props) => {
 							</ProfileVideoWrapper>
 						)}
 						{paragraphTwo && (
-							<Heading>{paragraphTwo}</Heading>
+							<Heading
+								className={`view-element-bottom-top ${
+									inView3 ? 'view-element-bottom-top--in-view' : ''
+								}`}
+								ref={ref3}
+							>
+								{paragraphTwo}
+							</Heading>
 						)}
 						{paragraphThree && (
-							<SubContent>{paragraphThree}</SubContent>
+							<SubContent
+								className={`view-element-bottom-top ${
+									inView4 ? 'view-element-bottom-top--in-view' : ''
+								}`}
+								ref={ref4}
+							>
+								{paragraphThree}
+							</SubContent>
 						)}
 
 					</LayoutGrid>

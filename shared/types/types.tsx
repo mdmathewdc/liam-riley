@@ -68,4 +68,5 @@ export type SiteSettingsType = {
 	easterEggText: string;
 	profileVid: VideoType;
 	showreelVid: VideoType;
+	footerCta: string;
 }

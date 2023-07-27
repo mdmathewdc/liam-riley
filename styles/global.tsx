@@ -48,7 +48,6 @@ export const GlobalStyles = createGlobalStyle`
 		background: var(--colour-white);
 		color: var(--colour-dark);
 		font-size: 16px;
-		min-height: 500vh;
 
 		&.no-scroll {
 			overflow-y: hidden;
@@ -68,7 +67,8 @@ export const GlobalStyles = createGlobalStyle`
 	select,
 	button,
 	label,
-	body {
+	body,
+	a {
 		color: var(--colour-dark);
 		line-height: 1.4;
 	}
@@ -84,7 +84,6 @@ export const GlobalStyles = createGlobalStyle`
 
 	a {
 		text-decoration: underline;
-		color: var(--colour-black);
 		transition: all var(--transition-speed-default) var(--transition-ease);
 	}
 
@@ -177,6 +176,7 @@ export const GlobalStyles = createGlobalStyle`
 
 	.type-small {
 		font-size: ${theme.size.small};
+		line-height: 1.2;
 	}
 
 	.type-label {
@@ -199,9 +199,9 @@ export const GlobalStyles = createGlobalStyle`
 	.view-element-bottom-top
 	{
 		opacity: 0;
-		transform: translateY(15px);
+		transform: translateY(10px);
 
-		transition: opacity 300ms cubic-bezier(0.65, 0, 0.35, 1), transform 300ms cubic-bezier(0.65, 0, 0.35, 1);
+		transition: all ${theme.transitionSpeed.slow} cubic-bezier(0.65, 0, 0.35, 1);
 
 		&--in-view
 		{

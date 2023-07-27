@@ -7,7 +7,6 @@ import pxToRem from '../../../utils/pxToRem';
 
 type Props = {
 	menuIsActive: boolean;
-	setMenuIsActive: (menuIsActive: boolean) => void;
 }
 
 const MenuWrapper = styled(motion.div)`
@@ -63,7 +62,6 @@ const wrapperVariants = {
 const Menu = (props: Props) => {
 	const {
 		menuIsActive,
-		setMenuIsActive
 	} = props;
 
 	const {
