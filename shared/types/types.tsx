@@ -70,3 +70,20 @@ export type SiteSettingsType = {
 	showreelVid: VideoType;
 	footerCta: string;
 }
+
+export type ProjectsType = {
+	year: number;
+	title: string;
+	slug: string;
+	vimeoUrl: string;
+	snippetVideo: VideoType;
+	gallery: {
+		images: [
+			ImageType,
+			VideoType
+		]
+	}
+	credits: [];
+	client: string;
+	category: string;
+}

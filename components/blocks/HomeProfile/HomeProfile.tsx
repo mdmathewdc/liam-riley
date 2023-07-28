@@ -18,7 +18,7 @@ type Props = {
 };
 
 const HomeProfileWrapper = styled.div`
-	margin-bottom: ${pxToRem(160)};
+	margin-bottom: ${pxToRem(360)};
 `;
 
 const AdditionalAnimation = styled.div`

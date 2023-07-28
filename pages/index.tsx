@@ -1,26 +1,30 @@
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo';
 import client from '../client';
-import { SiteSettingsType } from '../shared/types/types';
+import { ProjectsType, SiteSettingsType } from '../shared/types/types';
 import Acknowledgement from '../components/blocks/Acknowledgement';
 import HomeProfile from '../components/blocks/HomeProfile';
+import FeaturedProjects from '../components/blocks/FeaturedProjects';
 
 const PageWrapper = styled.div``;
 
 type Props = {
-	data: SiteSettingsType,
-	hasVisited: boolean,
-	lightColour: string
+	data: SiteSettingsType;
+	hasVisited: boolean;
+	lightColour: string;
+	featuredProjects: ProjectsType[]
 };
 
 const Page = (props: Props) => {
 	const {
 		data,
 		hasVisited,
-		lightColour
+		lightColour,
+		featuredProjects
 	} = props;
 
-	console.log('data', data);
+	// console.log('data', data);
+	// console.log('featuredProjects', featuredProjects);
 
 	return (
 	<PageWrapper>
@@ -41,24 +45,40 @@ const Page = (props: Props) => {
 			profileVideo={data.profileVid}
 			lightColour={lightColour}
 		/>
+		<FeaturedProjects
+			data={featuredProjects}
+		/>
 	</PageWrapper>
 	);
 };
 
 export async function getStaticProps() {
-	const query = `
+	const siteSettingsQuery = `
 		*[_type == 'siteSettings'][0] {
 			...,
 			profileVid{asset->},
 			showreelVid{asset->}
 		}
 	`;
+	const featuredProjectsQuery = `
+		*[_type == 'siteSettings'][0] {
+			"featuredProjects": *[_type == "projects"] {
+				_id,
+				title,
+				slug,
+				client,
+				snippetVideo{asset->}
+			}
+		}
+  	`;
 
-	const data = await client.fetch(query);
+	const data = await client.fetch(siteSettingsQuery);
+	const featuredProjects = await client.fetch(featuredProjectsQuery);
 
 	return {
 		props: {
-			data: data
+			data,
+			featuredProjects: featuredProjects.featuredProjects
 		},
 	};
 }
