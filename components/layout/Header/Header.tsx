@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import throttle from 'lodash.throttle';
 import { useRouter } from 'next/router';
 import useViewportWidth from '../../../hooks/useViewportWidth';
+import MenuColourGrid from '../../elements/MenuColourGrid';
 
 type StyledProps = {
 	$isActive: boolean;
@@ -30,6 +31,12 @@ const HeaderWrapper = styled.header<StyledProps>`
 	transform: ${(props) => props.$isActive ? 'translateY(0)' : 'translateY(-100%)'};
 
 	transition: all var(--transition-speed-default) var(--transition-ease);
+
+	.menu-colour-grid {
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			display: none;
+		}
+	}
 `;
 
 const Logo = styled.a`
@@ -87,7 +94,8 @@ const Header = (props: Props) => {
 		phone,
 		email,
 		instagramUrl,
-		vimeoUrl
+		vimeoUrl,
+		easterEggColors
 	} = siteData;
 
 	const [isActive, setIsActive] = useState(false);
@@ -186,6 +194,7 @@ const Header = (props: Props) => {
 							)}
 						</MenuLinks>
 					</MenuLinksWrapper>
+					<MenuColourGrid colors={easterEggColors} />
 					<MenuTrigger
 						onClick={() => setMenuIsActive(!menuIsActive)}
 						className="type-label"

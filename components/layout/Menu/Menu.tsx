@@ -4,6 +4,7 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 import siteData from '../../../data.preval';
 import Link from 'next/link';
 import pxToRem from '../../../utils/pxToRem';
+import FooterColourGrid from '../../blocks/FooterColourGrid';
 
 type Props = {
 	menuIsActive: boolean;
@@ -20,6 +21,14 @@ const MenuWrapper = styled(motion.div)`
 	background: rgba(255, 255, 255, 0.9);
 	backdrop-filter: blur(5px);
 	padding-top: var(--header-h);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	.footer-colour-grid,
+	.layout-wrapper {
+		width: 100%;
+	}
 `;
 
 const MenuInner = styled.div`
@@ -27,7 +36,7 @@ const MenuInner = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-start;
-	height: calc(100dvh - var(--header-h));
+	height: 50vh;
 	padding: ${pxToRem(24)} 0;
 `;
 
@@ -68,7 +77,8 @@ const Menu = (props: Props) => {
 		phone,
 		email,
 		instagramUrl,
-		vimeoUrl
+		vimeoUrl,
+		easterEggColors
 	} = siteData;
 
 	return (
@@ -131,6 +141,7 @@ const Menu = (props: Props) => {
 								</MenuLinks>
 							</MenuInner>
 						</LayoutWrapper>
+						<FooterColourGrid colors={easterEggColors} />
 					</MenuWrapper>
 				)}
 			</AnimatePresence>

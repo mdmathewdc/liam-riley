@@ -31,7 +31,7 @@ const FooterColourGrid = (props: Props) => {
 		<>
 			{hasColors && (
 				<Link href="/photography" passHref>
-					<FooterColourGridWrapper>
+					<FooterColourGridWrapper className="footer-colour-grid">
 						<LayoutGrid>
 							{firstTwelveColors.map((item, i) => (
 								<FooterColorBlock

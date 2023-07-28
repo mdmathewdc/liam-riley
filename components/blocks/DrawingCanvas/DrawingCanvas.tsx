@@ -51,7 +51,7 @@ const DrawingCanvas = (props: Props) => {
 			if (!path) {
 			path = new Path();
 			path.strokeColor = lightColour;
-			path.strokeWidth = 5; // Adjust the thickness of the line here
+			path.strokeWidth = 4; // Adjust the thickness of the line here
 			path.add(event.point);
 			} else {
 			// Smooth the line by adding an intermediate point
