@@ -34,7 +34,7 @@ const FeaturedProjectCardWrapper = styled(motion.div)`
 	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		margin-bottom: ${pxToRem(8)};
+		margin-bottom: ${pxToRem(32)};
 	}
 `;
 
@@ -73,6 +73,11 @@ const TitleWrapper = styled.a`
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
 	}
+
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 `;
 
 const Title = styled.h3<StyledProps>`
@@ -94,8 +99,9 @@ const Title = styled.h3<StyledProps>`
 	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-		font-size: 2.25rem !important;
-		line-height: 2.25rem !important;
+		font-size: 1.875rem !important;
+		line-height: 1.875rem !important;
+		margin-bottom: ${pxToRem(8)};
 	}
 `;
 
@@ -109,8 +115,8 @@ const Client = styled.p`
 		line-height: 1 !important;
 	}
 
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		display: none;
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		/* display: none; */
 	}
 `;
 
@@ -126,6 +132,10 @@ const FeaturedProjectSnippet = styled(motion.div)`
 	height: 169px;
 	z-index: 10;
 	pointer-events: none;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		display: none;
+	}
 
 	mux-player {
 		position: absolute;
@@ -144,6 +154,15 @@ const FeaturedProjectSnippetInner = styled(motion.div)`
 	width: 300px;
 	height: 169px;
 	pointer-events: none;
+`;
+
+const MobileSnippetWrapper = styled.div`
+	display: none;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		display: block;
+		grid-column: 1 / -1;
+	}
 `;
 
 const FeaturedProjectCard = (props: Props) => {
@@ -189,8 +208,8 @@ const FeaturedProjectCard = (props: Props) => {
 
 	const wrapperRotate = useTransform(
 		scrollY,
-		[distanceToTop - windowHeight, distanceToTop + 100],
-		['rotateY(20deg)', 'rotateY(-20deg)']
+		[distanceToTop - windowHeight, distanceToTop + distanceToTop / 4],
+		['rotateY(25deg)', 'rotateY(-25deg)']
 	);
 
 	const wrapperOpacity = useTransform(
@@ -265,10 +284,20 @@ const FeaturedProjectCard = (props: Props) => {
 					<Index $isActive={snippetVideo}>
 						{formattedIndex}
 					</Index>
+					<MobileSnippetWrapper>
+						<MuxPlayer
+							streamType="on-demand"
+							playbackId={data.snippetVideo?.asset?.playbackId}
+							autoPlay="muted"
+							loop={true}
+							thumbnailTime={0}
+							preload="auto"
+						/>
+					</MobileSnippetWrapper>
 					<Link href={`/projects/${data?.slug}`} passHref>
 						<TitleWrapper
 							ref={ref}
-							onMouseOver={() => setSnippetVideo(data.snippetVideo?.asset.playbackId)}
+							onMouseOver={() => setSnippetVideo(data.snippetVideo?.asset?.playbackId)}
 							onMouseOut={() => setSnippetVideo(false)}
 							className="featured-project-card__title-wrapper"
 						>

@@ -14,10 +14,14 @@ type Props = {
 	data: ProjectsType[];
 }
 
-const FeaturedProjectsWrapper = styled.div<StyledProps>`
+const FeaturedProjectsWrapper = styled.section<StyledProps>`
 	position: relative;
 	z-index: 5;
 	margin-bottom: ${pxToRem(360)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		margin-bottom: ${pxToRem(160)};
+	}
 
 	.layout-grid {
 		align-items: baseline;
@@ -44,7 +48,7 @@ const FeaturedProjectsList = styled.div`
 	z-index: 3;
 `;
 
-const FeaturedProjects = ({ data }: Props) => {
+const DesktopFeaturedProjects = ({ data }: Props) => {
 	const [allTitleWidths, setAllTitleWidths] = useState<number[]>([]);
 	const [fontSize, setFontSize] = useState("5.375rem");
 	const [lineHeight, setLineHeight] = useState("1");
@@ -117,4 +121,4 @@ const FeaturedProjects = ({ data }: Props) => {
 	);
 };
 
-export default FeaturedProjects;
+export default DesktopFeaturedProjects;

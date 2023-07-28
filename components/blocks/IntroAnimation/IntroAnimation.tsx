@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import pxToRem from '../../../utils/pxToRem';
 import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
+import DrawingCanvas from '../DrawingCanvas';
 
 type Props = {
 	title: string;
@@ -23,7 +24,7 @@ const IntroAnimationWrapper = styled(motion.div)<StyledProps>`
 	height: calc(200vh);
 	margin-bottom: ${(props) => `calc(${props.$titleHeight}px + 36px)`};
 	z-index: 1;
-	background: var(--colour-light);
+	pointer-events: none;
 
 	.layout-grid {
 		position: relative;
@@ -118,12 +119,6 @@ const IntroAnimation = (props: Props) => {
 		[0, -20]
 	);
 
-	const background = useTransform(
-		scrollY,
-		[windowHeight, windowHeight + 200],
-		[lightColour, '#FFF']
-	);
-
 	const handleSetWindowHeight = (height: number) => {
 		setWindowHeight(height);
 	};
@@ -162,11 +157,12 @@ const IntroAnimation = (props: Props) => {
 		<IntroAnimationWrapper
 			$titleHeight={titleHeight}
 			className="performant"
-			style={{
-				background
-			}}
 		>
 			<StickyWrapper>
+				<DrawingCanvas
+					windowHeight={windowHeight}
+					lightColour={lightColour}
+				/>
 				<VideoWrapper style={{ height, width }}>
 					{title && (
 						<TitleOuterWrapper>

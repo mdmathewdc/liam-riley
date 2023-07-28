@@ -17,8 +17,14 @@ type Props = {
 	lightColour: string;
 };
 
-const HomeProfileWrapper = styled.div`
+const HomeProfileWrapper = styled.section`
+	position: relative;
+	z-index: 20;
 	margin-bottom: ${pxToRem(360)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		margin-bottom: ${pxToRem(160)};
+	}
 `;
 
 const AdditionalAnimation = styled.div`

@@ -4,7 +4,8 @@ import client from '../client';
 import { ProjectsType, SiteSettingsType } from '../shared/types/types';
 import Acknowledgement from '../components/blocks/Acknowledgement';
 import HomeProfile from '../components/blocks/HomeProfile';
-import FeaturedProjects from '../components/blocks/FeaturedProjects';
+import DesktopFeaturedProjects from '../components/blocks/DesktopFeaturedProjects';
+import DrawingCanvas from '../components/blocks/DrawingCanvas';
 
 const PageWrapper = styled.div``;
 
@@ -45,7 +46,8 @@ const Page = (props: Props) => {
 			profileVideo={data.profileVid}
 			lightColour={lightColour}
 		/>
-		<FeaturedProjects
+		{/* <DrawingCanvas /> */}
+		<DesktopFeaturedProjects
 			data={featuredProjects}
 		/>
 	</PageWrapper>
