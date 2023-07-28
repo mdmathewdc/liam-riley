@@ -10,7 +10,7 @@ type Props = {
 }
 
 const DrawingCanvasWrapper = styled(motion.div)`
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
@@ -87,7 +87,7 @@ const DrawingCanvas = (props: Props) => {
 
 	const opacity = useTransform(
 		scrollY,
-		[windowHeight, windowHeight + 200],
+		[windowHeight, windowHeight * 2],
 		[1, 0]
 	);
 

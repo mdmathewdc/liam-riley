@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo';
 import client from '../client';
-import { ProjectsType, SiteSettingsType } from '../shared/types/types';
+import { ProjectsType, SiteSettingsType, Transitions } from '../shared/types/types';
 import Acknowledgement from '../components/blocks/Acknowledgement';
 import HomeProfile from '../components/blocks/HomeProfile';
 import DesktopFeaturedProjects from '../components/blocks/DesktopFeaturedProjects';
-import DrawingCanvas from '../components/blocks/DrawingCanvas';
+import { motion } from 'framer-motion';
 
-const PageWrapper = styled.div``;
+const PageWrapper = styled(motion.div)``;
 
 type Props = {
 	data: SiteSettingsType;
 	hasVisited: boolean;
 	lightColour: string;
-	featuredProjects: ProjectsType[]
+	featuredProjects: ProjectsType[];
+	pageTransitionVariants: Transitions;
 };
 
 const Page = (props: Props) => {
@@ -21,14 +22,17 @@ const Page = (props: Props) => {
 		data,
 		hasVisited,
 		lightColour,
-		featuredProjects
+		featuredProjects,
+		pageTransitionVariants
 	} = props;
 
-	// console.log('data', data);
-	// console.log('featuredProjects', featuredProjects);
-
 	return (
-	<PageWrapper>
+	<PageWrapper
+		variants={pageTransitionVariants}
+		initial="hidden"
+		animate="visible"
+		exit="hidden"
+	>
 		<NextSeo
 			title="Liam Riley | Editor | Home"
 			description={data.seoDescription || ''}
@@ -46,7 +50,6 @@ const Page = (props: Props) => {
 			profileVideo={data.profileVid}
 			lightColour={lightColour}
 		/>
-		{/* <DrawingCanvas /> */}
 		<DesktopFeaturedProjects
 			data={featuredProjects}
 		/>
