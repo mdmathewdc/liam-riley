@@ -134,7 +134,21 @@ const Header = (props: Props) => {
 		return () => {
 			window.removeEventListener('scroll', throttledHandleScroll);
 		};
-	}, [viewportWidth]);
+	}, [viewportWidth, router.pathname]);
+
+	useEffect(() => {
+		const currentScrollPos = window.pageYOffset;
+		if (router.pathname !== '/' && currentScrollPos === 0) {
+			console.log('router.pathname', router.pathname);
+			
+			setIsActive(true);
+		}
+
+		if (router.pathname === '/' && currentScrollPos === 0) {
+			setIsActive(false);
+		}
+	}, [router.pathname]);
+	
 
 	return (
 		<HeaderWrapper

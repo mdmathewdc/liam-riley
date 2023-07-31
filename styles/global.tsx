@@ -228,6 +228,7 @@ export const GlobalStyles = createGlobalStyle`
 		--media-object-fit: cover;
 		--media-object-position: center;
 		--controls: none;
+		transition: all 0 var(--transition-ease) !important;
 	}
 
 	.performance {

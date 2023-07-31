@@ -7,6 +7,8 @@ import styled from 'styled-components';
 type Props = {
 	windowHeight: number;
 	lightColour: string;
+	isFixed?: boolean;
+	isProjectsPage?: boolean;
 }
 
 const DrawingCanvasWrapper = styled(motion.div)`
@@ -16,12 +18,14 @@ const DrawingCanvasWrapper = styled(motion.div)`
 	height: 100vh;
 	height: 100dvh;
 	width: 100%;
+	overflow: hidden;
 `;
 
 const DrawingCanvas = (props: Props) => {
 	const {
 		windowHeight,
-		lightColour
+		lightColour,
+		isProjectsPage = false
 	} = props;
 
 	const maxPathLength = 750;
@@ -87,13 +91,14 @@ const DrawingCanvas = (props: Props) => {
 
 	const opacity = useTransform(
 		scrollY,
-		[windowHeight, windowHeight * 2],
+		[isProjectsPage ? 0 : windowHeight, isProjectsPage ? windowHeight / 2 : windowHeight * 2],
 		[1, 0]
 	);
 
   return (
 	<DrawingCanvasWrapper
 		style={{ opacity }}
+		className="drawing-canvas"
 	>
 		<canvas
 		  ref={canvasRef}
