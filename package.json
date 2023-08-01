@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.22.9",
     "@mux/mux-player-react": "^1.11.4",
+    "@portabletext/react": "^3.0.4",
     "@sanity/client": "^6.1.7",
     "@styled-jsx/plugin-sass": "^4.0.2",
     "@types/js-cookie": "^3.0.3",
@@ -22,6 +23,7 @@
     "base-64": "^1.0.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
+    "embla-carousel-react": "^8.0.0-rc11",
     "framer-motion": "^8.4.6",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",

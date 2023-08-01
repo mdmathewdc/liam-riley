@@ -5,6 +5,7 @@ import ProjectsTitle from '../../components/blocks/ProjectsTitle';
 import { NextSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 import MainFilterBar from '../../components/blocks/MainFilterBar';
+import ProjectsList from '../../components/blocks/ProjectsList';
 
 const PageWrapper = styled.div``;
 
@@ -14,7 +15,9 @@ type Props = {
 	lightColour: string;
 	categories: {
 		[key: string]: number;
-	}
+	};
+	initialLastProjectId: string;
+	allProjectsCount: number;
 };
 
 const Page = (props: Props) => {
@@ -22,10 +25,16 @@ const Page = (props: Props) => {
 		projects,
 		siteSettings,
 		lightColour,
-		categories
+		categories,
+		initialLastProjectId,
+		allProjectsCount
 	} = props;
 
 	const [windowHeight, setWindowHeight] = useState(0);
+	const [lastProjectId, setlastProjectId] = useState(initialLastProjectId);
+	const [paginatedProjects, setPaginatedProjects] = useState(projects);
+	const [noMoreProjectsToFetch, setNoMoreProjectsToFetch] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleSetWindowHeight = (height: number) => {
 		setWindowHeight(height);
@@ -45,8 +54,37 @@ const Page = (props: Props) => {
 		}
 	}, []);
 
-	console.log('projects', projects);
-	console.log('siteSettings', siteSettings);
+	const handleLoadMore = async () => {
+		setIsLoading(true);
+
+		if (lastProjectId === null) {
+			return []
+		}
+
+		const projectsQuery = `
+			*[_type == 'projects'] | order(orderRank) [${paginatedProjects.length}...${paginatedProjects.length + 4}] {
+				...,
+				gallery[] {
+					...,
+					_type == "snippetVideo" => {
+						asset->
+					},
+				}
+			}
+		`;
+
+		const results = await client.fetch(projectsQuery);
+		let newLastId = '';
+
+		if (results.length > 0) {
+			newLastId = results[results.length - 1]._id
+		}
+
+		setPaginatedProjects([...paginatedProjects, ...results]);
+		setlastProjectId(newLastId);
+		setNoMoreProjectsToFetch(results.length < 4);
+		setIsLoading(false);
+	};
 
 	return (
 		<PageWrapper>
@@ -62,17 +100,34 @@ const Page = (props: Props) => {
 			/>
 			<MainFilterBar
 				categories={categories}
-				allProjectsCount={projects.length}
+				allProjectsCount={allProjectsCount}
+			/>
+			<ProjectsList
+				projects={paginatedProjects}
+				handleLoadMore={() => handleLoadMore()}
+				noMoreProjectsToFetch={noMoreProjectsToFetch}
+				isLoading={isLoading}
 			/>
 		</PageWrapper>
 	);
 };
 
 export async function getStaticProps() {
+	const allProjectsQuery = `
+		*[_type == 'projects'] | order(orderRank) [0...100] {
+			category
+		}
+	`;
+
 	const projectsQuery = `
-		*[_type == 'projects'] {
+		*[_type == 'projects'] | order(orderRank) [0...4] {
 			...,
-			snippetVideo{asset->}
+			gallery[] {
+				...,
+				_type == "snippetVideo" => {
+					asset->
+				},
+			}
 		}
 	`;
 
@@ -86,9 +141,9 @@ export async function getStaticProps() {
 
 	const projects = await client.fetch(projectsQuery);
 	const siteSettings = await client.fetch(siteSettingsQuery);
+	const allProjects = await client.fetch(allProjectsQuery);
 
-	// loop through projects and count the amount of projects are in each category
-	const categories = projects.map((project: ProjectsType) => project.category);
+	const categories = allProjects.map((project: ProjectsType) => project.category);
 	const categoryCount = categories.reduce((acc: any, curr: any) => {
 		if (typeof acc[curr] == 'undefined') {
 			acc[curr] = 1;
@@ -97,12 +152,17 @@ export async function getStaticProps() {
 		}
 		return acc;
 	}, {});
+	const allProjectsCount = allProjects.length;
+
+	const lastProjectId = projects[projects.length - 1]._id;
 
 	return {
 		props: {
 			projects,
 			siteSettings,
-			categories: categoryCount
+			categories: categoryCount,
+			initialLastProjectId: lastProjectId,
+			allProjectsCount
 		},
 	};
 }

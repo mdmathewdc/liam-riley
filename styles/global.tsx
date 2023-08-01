@@ -182,6 +182,11 @@ export const GlobalStyles = createGlobalStyle`
 	.type-label {
 		font-size: ${theme.size.label};
 		line-height: 1.125rem;
+		
+		* {
+			font-size: ${theme.size.label};
+			line-height: 1.125rem;
+		}
 	}
 
 	.view-element-fade-in
@@ -207,6 +212,20 @@ export const GlobalStyles = createGlobalStyle`
 		{
 			opacity: 1;
 			transform: translateY(0);
+		}
+	}
+
+	.view-element-left-right
+	{
+		opacity: 0;
+		transform: translateX(30px);
+
+		transition: all ${theme.transitionSpeed.slow} cubic-bezier(0.65, 0, 0.35, 1);
+
+		&--in-view
+		{
+			opacity: 1;
+			transform: translateX(0);
 		}
 	}
 

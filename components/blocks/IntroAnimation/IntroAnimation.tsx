@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { VideoType } from '../../../shared/types/types';
 import MuxPlayer from '@mux/mux-player-react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import pxToRem from '../../../utils/pxToRem';
 import LayoutWrapper from '../../common/LayoutWrapper';

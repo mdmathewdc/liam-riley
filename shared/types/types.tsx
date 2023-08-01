@@ -77,12 +77,7 @@ export type ProjectsType = {
 	slug: string;
 	vimeoUrl: string;
 	snippetVideo: VideoType;
-	gallery: {
-		images: [
-			ImageType,
-			VideoType
-		]
-	}
+	gallery: VideoType[];
 	credits: [];
 	client: string;
 	category: string;
