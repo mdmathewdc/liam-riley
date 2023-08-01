@@ -135,9 +135,7 @@ const ProjectCard = (props: Props) => {
 	});
 
 	return (
-		<ProjectCardWrapper
-			ref={ref}
-		>
+		<ProjectCardWrapper ref={ref}>
 			<ContentWrapper>
 				<LayoutWrapper>
 					<LayoutGrid>
@@ -152,6 +150,7 @@ const ProjectCard = (props: Props) => {
 										thumbnailTime={0}
 										loading="viewport"
 										style={{ aspectRatio: 16/9 }}
+										muted={true}
 									/>
 								)}
 							</MobileMuxWrapper>
@@ -197,6 +196,7 @@ const ProjectCard = (props: Props) => {
 				gallery={gallery}
 				credits={credits}
 				creditsIsActive={creditsIsActive}
+				slug={slug}
 			/>
 		</ProjectCardWrapper>
 	);

@@ -27,12 +27,13 @@ const ProjectsListWrapper = styled.section<StyledProps>`
 	transition: opacity var(--transition-speed-default) var(--transition-ease);
 `;
 
-const LoadMoreWrapper = styled(motion.div)`
+const LoadMoreWrapper = styled(motion.div)<StyledProps>`
 	grid-column: 3 / -1;
 	text-align: left;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
+		padding-bottom: ${(props) => props.$isLoading ? pxToRem(1000) : 0};
 	}
 `;
 
@@ -75,7 +76,7 @@ const ProjectsList = (props: Props) => {
 					client={item?.client}
 					credits={item?.credits}
 					gallery={item?.gallery}
-					slug={item?.slug}
+					slug={item?.slug?.current}
 					title={item?.title}
 					year={item?.year}
 					key={i}
@@ -90,6 +91,7 @@ const ProjectsList = (props: Props) => {
 								initial='hidden'
 								animate='visible'
 								exit='hidden'
+								$isLoading={isLoading}
 							>
 								<LoadMoreTrigger
 									className="type-h3"

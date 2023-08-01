@@ -6,11 +6,13 @@ import ProjectCardGallerySlide from './ProjectCardGallerySlide';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import ProjectCardCredits from './ProjectCardCredits';
+import Link from 'next/link';
 
 type Props = {
 	gallery: VideoType[];
 	credits: [];
 	creditsIsActive: boolean;
+	slug: string;
 }
 
 const ProjectCardGalleryWrapper = styled(motion.div)`
@@ -21,7 +23,7 @@ const ProjectCardGalleryWrapper = styled(motion.div)`
 	}
 `;
 
-const Embla = styled.div`
+const Embla = styled.a`
 	overflow: hidden;
 `;
 
@@ -29,6 +31,12 @@ const EmblaContainer = styled.div`
 	display: flex;
 	padding-left: calc(20% - 32px);
 	margin-right: ${pxToRem(16)};
+
+	transition: padding-left var(--transition-speed-default) var(--transition-ease);
+
+	&:hover {
+		padding-left: calc(20% - 40px);
+	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		padding-left: ${pxToRem(16)};
@@ -50,7 +58,14 @@ const EmblaSlide = styled.div`
 	}
 `;
 
-const ProjectCardGallery = ({ gallery, credits, creditsIsActive }: Props) => {
+const ProjectCardGallery = (props: Props) => {
+	const {
+		gallery,
+		credits,
+		creditsIsActive,
+		slug
+	} = props;
+
 	const hasSlides = gallery?.length > 0;
 
 	let gallerySlides: VideoType[] = [];
@@ -84,23 +99,25 @@ const ProjectCardGallery = ({ gallery, credits, creditsIsActive }: Props) => {
 			ref={ref}
 		>
 			{hasSlides && (
-				<Embla
-					className="embla"
-					ref={emblaRef}
-				>
-					<EmblaContainer className="embla__container">
-						{gallerySlides.map((item, i) => (
-							<EmblaSlide
-								className="embla__slide"
-								key={i}
-							>
-								<ProjectCardGallerySlide
-									data={item?.asset?.playbackId}
-								/>
-							</EmblaSlide>
-						))}
-					</EmblaContainer>
-				</Embla>
+				<Link href={`/projects/${slug}`} passHref>
+					<Embla
+						className="embla"
+						ref={emblaRef}
+					>
+						<EmblaContainer className="embla__container">
+							{gallerySlides.map((item, i) => (
+								<EmblaSlide
+									className="embla__slide"
+									key={i}
+								>
+									<ProjectCardGallerySlide
+										data={item?.asset?.playbackId}
+									/>
+								</EmblaSlide>
+							))}
+						</EmblaContainer>
+					</Embla>
+				</Link>
 			)}
 			<ProjectCardCredits
 				credits={credits}

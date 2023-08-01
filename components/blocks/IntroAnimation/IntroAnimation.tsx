@@ -217,6 +217,7 @@ const IntroAnimation = (props: Props) => {
 							autoPlay="muted"
 							loop={true}
 							thumbnailTime={0}
+							muted={true}
 						/>
 					)}
 				</VideoWrapper>

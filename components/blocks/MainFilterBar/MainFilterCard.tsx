@@ -2,9 +2,16 @@ import styled from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
 import { motion } from 'framer-motion';
 
+type StyledProps = {
+	$isActive: boolean;
+}
+
 type Props = {
 	title: string;
 	count: number;
+	handleFilterClick: (filter: string[]) => void;
+	isActive: boolean;
+	handleSlideToIndex: () => void;
 }
 
 const MainFilterCardTrigger = styled(motion.button)`
@@ -12,12 +19,14 @@ const MainFilterCardTrigger = styled(motion.button)`
 	align-items: flex-end;
 `;
 
-const Title = styled.div`
+const Title = styled.div<StyledProps>`
 	margin-right: ${pxToRem(8)};
+	opacity: ${(props) => props.$isActive ? 1 : 0.5};
 `;
 
-const Count = styled.div`
+const Count = styled.div<StyledProps>`
 	line-height: 1.2;
+	opacity: ${(props) => props.$isActive ? 1 : 0.5};
 `;
 
 const childVariants = {
@@ -42,17 +51,41 @@ const childVariants = {
 const MainFilterCard = (props: Props) => {
 	const {
 		title,
-		count
+		count,
+		handleFilterClick,
+		isActive,
+		handleSlideToIndex
 	} = props;
+
+	let filter = ['narrative', 'commercial', 'music-video'];
+
+	if (title === 'All') {
+		filter = ['narrative', 'commercial', 'music-video'];
+	} else if (title === 'Narrative') {
+		filter = ['narrative'];
+	} else if (title === 'Commercial') {
+		filter = ['commercial'];
+	} else if (title === 'Music Video') {
+		filter = ['music-video'];
+	}
+
+	const handleClick = () => {
+		handleSlideToIndex();
+		handleFilterClick(filter)
+	}
 
 	return (
 		<MainFilterCardTrigger
 			variants={childVariants}
+			onClick={() => handleClick()}
 		>
-			<Title className="type-h3">
+			<Title
+				className="type-h3"
+				$isActive={isActive}
+			>
 				{title}
 			</Title>
-			<Count>
+			<Count $isActive={isActive}>
 				{count}
 			</Count>
 		</MainFilterCardTrigger>

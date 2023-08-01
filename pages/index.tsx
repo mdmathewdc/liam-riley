@@ -34,8 +34,8 @@ const Page = (props: Props) => {
 		exit="hidden"
 	>
 		<NextSeo
-			title="Liam Riley | Editor | Home"
-			description={data.seoDescription || ''}
+			title="Liam Riley | Editor"
+			description={data?.seoDescription || ''}
 		/>
 		<Acknowledgement
 			hasVisited={hasVisited}

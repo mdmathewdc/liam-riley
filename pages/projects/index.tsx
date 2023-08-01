@@ -35,24 +35,12 @@ const Page = (props: Props) => {
 	const [paginatedProjects, setPaginatedProjects] = useState(projects);
 	const [noMoreProjectsToFetch, setNoMoreProjectsToFetch] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [activeFilters, setActiveFilters] = useState(['narrative', 'commercial', 'music-video']);
+	const [isFirstRender, setIsFirstRender] = useState(true);
 
 	const handleSetWindowHeight = (height: number) => {
 		setWindowHeight(height);
 	};
-
-	useEffect(() => {
-		handleSetWindowHeight(window.innerHeight);
-
-		window.addEventListener('resize', () => {
-			handleSetWindowHeight(window.innerHeight);
-		});
-	
-		return () => {
-			window.removeEventListener('resize', () => {
-				handleSetWindowHeight(window.innerHeight);
-			});
-		}
-	}, []);
 
 	const handleLoadMore = async () => {
 		setIsLoading(true);
@@ -61,8 +49,10 @@ const Page = (props: Props) => {
 			return []
 		}
 
+		const categoriesFilter = activeFilters.map((category) => `'${category}'`).join(',');
+
 		const projectsQuery = `
-			*[_type == 'projects'] | order(orderRank) [${paginatedProjects.length}...${paginatedProjects.length + 4}] {
+			*[_type == 'projects' && category in [${categoriesFilter}]] | order(orderRank) [${paginatedProjects.length}...${paginatedProjects.length + 5}] {
 				...,
 				gallery[] {
 					...,
@@ -80,17 +70,73 @@ const Page = (props: Props) => {
 			newLastId = results[results.length - 1]._id
 		}
 
-		setPaginatedProjects([...paginatedProjects, ...results]);
+		setPaginatedProjects([...paginatedProjects, ...results.slice(0, 4)]);
 		setlastProjectId(newLastId);
-		setNoMoreProjectsToFetch(results.length < 4);
+		setNoMoreProjectsToFetch(results.length <= 4);
 		setIsLoading(false);
 	};
+
+	const handleFilter = async () => {
+		setIsLoading(true);
+		setPaginatedProjects([]);
+		setlastProjectId(initialLastProjectId);
+
+		const categoriesFilter = activeFilters.map((category) => `'${category}'`).join(',');
+
+		const projectsQuery = `
+			*[_type == 'projects' && category in [${categoriesFilter}]] | order(orderRank) [0...5] {
+				...,
+				gallery[] {
+					...,
+					_type == "snippetVideo" => {
+						asset->
+					},
+				}
+			}
+		`;
+
+		const results = await client.fetch(projectsQuery);
+		let newLastId = '';
+
+		if (results.length > 0) {
+			newLastId = results[results.length - 1]._id
+		}
+
+		setPaginatedProjects(results.slice(0, 4));
+		setlastProjectId(newLastId);
+		setNoMoreProjectsToFetch(results.length <= 4);
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		if (isFirstRender) return;
+		handleFilter();
+	}, [activeFilters]);
+
+	useEffect(() => {
+		handleSetWindowHeight(window.innerHeight);
+
+		window.addEventListener('resize', () => {
+			handleSetWindowHeight(window.innerHeight);
+		});
+
+		const timer = setTimeout(() => {
+			setIsFirstRender(false);
+		}, 1000);
+	
+		return () => {
+			window.removeEventListener('resize', () => {
+				handleSetWindowHeight(window.innerHeight);
+			});
+			clearTimeout(timer);
+		}
+	}, []);
 
 	return (
 		<PageWrapper>
 			<NextSeo
-				title="Liam Riley | Editor | Projects"
-				description={siteSettings.seoDescription || ''}
+				title="Liam Riley | Projects"
+				description={siteSettings?.seoDescription || ''}
 			/>
 			<ProjectsTitle
 				title={siteSettings.projectsTitle}
@@ -101,6 +147,8 @@ const Page = (props: Props) => {
 			<MainFilterBar
 				categories={categories}
 				allProjectsCount={allProjectsCount}
+				handleFilterClick={(categories) => setActiveFilters(categories)}
+				activeFilters={activeFilters}
 			/>
 			<ProjectsList
 				projects={paginatedProjects}

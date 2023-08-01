@@ -12,6 +12,8 @@ type Props = {
 		[key: string]: number;
 	}
 	allProjectsCount: number;
+	handleFilterClick: (filter: string[]) => void;
+	activeFilters: string[];
 };
 
 const MainFilterBarWrapper = styled.div`
@@ -70,7 +72,9 @@ const wrapperVariants = {
 const MainFilterBar = (props: Props) => {
 	const {
 		categories,
-		allProjectsCount
+		allProjectsCount,
+		handleFilterClick,
+		activeFilters
 	} = props;
 
 	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -85,45 +89,53 @@ const MainFilterBar = (props: Props) => {
 		<MainFilterBarWrapper
 			ref={ref}
 		>
-			{/* <LayoutWrapper>
-				<LayoutGrid> */}
-					<MainFilterBarInner>
-						<Embla className="embla" ref={emblaRef}>
-							<EmblaContainer
-								className="embla__container"
-								variants={wrapperVariants}
-								initial='hidden'
-								animate={inView ? 'visible' : 'hidden'}
-							>
-								<EmblaSlide className="embla__slide">
-									<MainFilterCard
-										title="All"
-										count={allProjectsCount}
-									/>
-								</EmblaSlide>
-								<EmblaSlide className="embla__slide">
-									<MainFilterCard
-										title="Commercial"
-										count={categories['commercial']}
-									/>
-								</EmblaSlide>
-								<EmblaSlide className="embla__slide">
-									<MainFilterCard
-										title="Music Video"
-										count={categories['music-video']}
-									/>
-								</EmblaSlide>
-								<EmblaSlide className="embla__slide">
-									<MainFilterCard
-										title="Narrative"
-										count={categories['narrative']}
-									/>
-								</EmblaSlide>
-							</EmblaContainer>
-						</Embla>
-					</MainFilterBarInner>
-				{/* </LayoutGrid>
-			</LayoutWrapper> */}
+			<MainFilterBarInner>
+				<Embla className="embla" ref={emblaRef}>
+					<EmblaContainer
+						className="embla__container"
+						variants={wrapperVariants}
+						initial='hidden'
+						animate={inView ? 'visible' : 'hidden'}
+					>
+						<EmblaSlide className="embla__slide">
+							<MainFilterCard
+								title="All"
+								count={allProjectsCount}
+								handleFilterClick={handleFilterClick}
+								isActive={activeFilters.length === 3}
+								handleSlideToIndex={() => emblaApi?.scrollTo(0)}
+							/>
+						</EmblaSlide>
+						<EmblaSlide className="embla__slide">
+							<MainFilterCard
+								title="Commercial"
+								count={categories['commercial']}
+								handleFilterClick={handleFilterClick}
+								isActive={activeFilters.includes('commercial') && activeFilters.length === 1}
+								handleSlideToIndex={() => emblaApi?.scrollTo(1)}
+							/>
+						</EmblaSlide>
+						<EmblaSlide className="embla__slide">
+							<MainFilterCard
+								title="Music Video"
+								count={categories['music-video']}
+								handleFilterClick={handleFilterClick}
+								isActive={activeFilters.includes('music-video') && activeFilters.length === 1}
+								handleSlideToIndex={() => emblaApi?.scrollTo(2)}
+							/>
+						</EmblaSlide>
+						<EmblaSlide className="embla__slide">
+							<MainFilterCard
+								title="Narrative"
+								count={categories['narrative']}
+								handleFilterClick={handleFilterClick}
+								isActive={activeFilters.includes('narrative') && activeFilters.length === 1}
+								handleSlideToIndex={() => emblaApi?.scrollTo(3)}
+							/>
+						</EmblaSlide>
+					</EmblaContainer>
+				</Embla>
+			</MainFilterBarInner>
 		</MainFilterBarWrapper>
 	);
 };

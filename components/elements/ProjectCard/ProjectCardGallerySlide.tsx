@@ -24,6 +24,7 @@ const ProjectCardGallerySlide = ({ data }: Props) => {
 					playbackId={data}
 					autoPlay={isHovered}
 					loop={true}
+					muted={true}
 					thumbnailTime={0}
 					ref={videoRef}
 					style={{ aspectRatio: 16/9 }}

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 type Props = {
 	title: string;
-	value: string;
+	value: string | number;
 }
 
 const ProjectCardContentWrapper = styled(motion.div)``;

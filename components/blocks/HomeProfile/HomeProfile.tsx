@@ -150,6 +150,7 @@ const HomeProfile = (props: Props) => {
 							autoPlay="muted"
 							loop={true}
 							thumbnailTime={0}
+							muted={true}
 						/>
 					</MobileIntroMuxWrapper>
 				)}
@@ -210,6 +211,7 @@ const HomeProfile = (props: Props) => {
 									autoPlay="muted"
 									loop={true}
 									thumbnailTime={0}
+									muted={true}
 								/>
 							</ProfileVideoWrapper>
 						)}

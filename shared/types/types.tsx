@@ -74,7 +74,9 @@ export type SiteSettingsType = {
 export type ProjectsType = {
 	year: number;
 	title: string;
-	slug: string;
+	slug: {
+		current: string;
+	};
 	vimeoUrl: string;
 	snippetVideo: VideoType;
 	gallery: VideoType[];
