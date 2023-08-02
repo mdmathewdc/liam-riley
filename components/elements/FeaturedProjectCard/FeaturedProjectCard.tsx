@@ -143,6 +143,8 @@ const FeaturedProjectSnippet = styled(motion.div)`
 		width: 300px;
 		height: 169px;
 
+		transition: unset !important;
+
 		--media-object-fit: cover;
 		--media-object-position: center;
 		--controls: none;
@@ -266,6 +268,9 @@ const FeaturedProjectCard = (props: Props) => {
 		}
 	};
 
+	console.log('data', data);
+	
+
 	return (
 		<FeaturedProjectCardWrapper
 			className="featured-project-card"
@@ -287,7 +292,7 @@ const FeaturedProjectCard = (props: Props) => {
 					<MobileSnippetWrapper>
 						<MuxPlayer
 							streamType="on-demand"
-							playbackId={data.snippetVideo?.asset?.playbackId}
+							playbackId={data?.gallery[0]?.asset?.playbackId}
 							autoPlay="muted"
 							loop={true}
 							thumbnailTime={0}
@@ -298,7 +303,7 @@ const FeaturedProjectCard = (props: Props) => {
 					<Link href={`/projects/${data?.slug}`} passHref>
 						<TitleWrapper
 							ref={ref}
-							onMouseOver={() => setSnippetVideo(data.snippetVideo?.asset?.playbackId)}
+							onMouseOver={() => setSnippetVideo(data?.gallery[0]?.asset?.playbackId)}
 							onMouseOut={() => setSnippetVideo(false)}
 							className="featured-project-card__title-wrapper"
 						>

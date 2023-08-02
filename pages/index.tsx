@@ -72,7 +72,12 @@ export async function getStaticProps() {
 				title,
 				slug,
 				client,
-				snippetVideo{asset->}
+				gallery[] {
+					...,
+					_type == "snippetVideo" => {
+						asset->
+					},
+				}
 			}
 		}
   	`;
