@@ -198,7 +198,7 @@ const Header = (props: Props) => {
 								</Link>
 							)}
 							{phone && (
-								<Link href="/projects" passHref>
+								<Link href={`tel:${phone}`} passHref>
 									<MenuLink className="type-label">
 										{phone}
 									</MenuLink>

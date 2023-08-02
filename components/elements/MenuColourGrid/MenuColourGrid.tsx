@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { ColorType } from '../../../shared/types/types';
 import Link from 'next/link';
+import MenuColorBlock from './MenuColorBlock';
+import { useEffect, useState } from 'react';
 
 type Props = {
 	colors: [
@@ -8,7 +10,7 @@ type Props = {
 	]
 };
 
-const MenuColourGridWrapper = styled.div`
+const MenuColourGridWrapper = styled.a`
 	grid-column: span 2;
 	text-align: right;
 	display: flex;
@@ -23,29 +25,40 @@ const Inner = styled.div`
 	flex-wrap: wrap;
 `;
 
-const ColorBlock = styled.div`
-	height: 8px;
-	width: 8px;
-	background: ${(props) => props.color};
-`;
-
 const MenuColourGrid = (props: Props) => {
 	const {
 		colors
 	} = props;
-
+	
 	const hasColors = colors.length > 0;
 	const firstNineColors = colors.slice(0, 9);
+
+	const [nineColors, setNineColors] = useState(firstNineColors);
+
+	const handleNewRandomNineColors = () => {
+		const newNineColors = colors.slice(0, 9);
+
+		for (let i = newNineColors.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[newNineColors[i], newNineColors[j]] = [newNineColors[j], newNineColors[i]];
+		}
+
+		setNineColors(newNineColors);
+	};
 
 	return (
 		<>
 			{hasColors && (
 				<Link href="/photography" passHref>
-					<MenuColourGridWrapper className="menu-colour-grid">
+					<MenuColourGridWrapper
+						className="menu-colour-grid"
+						onMouseOver={() => handleNewRandomNineColors()}
+					>
 						<Inner>
-							{firstNineColors.map((item, i) => (
-								<ColorBlock
+							{nineColors.map((item, i) => (
+								<MenuColorBlock
 									color={item.hex}
+									colors={colors}
 									key={i}
 								/>
 							))}

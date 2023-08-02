@@ -41,17 +41,16 @@ const FooterColorBlock = (props: Props) => {
 
 	const handleHoverColor = () => {
 		const randomColor = colors[Math.floor(Math.random() * colors.length)].hex;
-
 		setHoverColor(randomColor);
-	}
+	};
 
 	return (
 		<FooterColorBlockWrapper
 			className="footer-color-block"
 			onMouseOver={() => handleHoverColor()}
-			onMouseOut={() => setHoverColor(color)}
+			onMouseOut={() => handleHoverColor()}
 		>
-			<FooterColorBlockInner $hex={hoverColor ? hoverColor : color} />
+			<FooterColorBlockInner $hex={hoverColor} />
 		</FooterColorBlockWrapper>
 	);
 };

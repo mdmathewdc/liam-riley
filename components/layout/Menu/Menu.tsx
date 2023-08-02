@@ -132,7 +132,7 @@ const Menu = (props: Props) => {
 										</Link>
 									)}
 									{phone && (
-										<Link href="/projects" passHref>
+										<Link href={`tel:${phone}`} passHref>
 											<MenuLink className="type-h3">
 												{phone}
 											</MenuLink>

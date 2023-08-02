@@ -63,7 +63,6 @@ const FooterMobile = (props: Props) => {
 		instagramUrl,
 		vimeoUrl,
 		linkedInUrl,
-		footerCta,
 		year
 	} = props;
 
@@ -97,7 +96,7 @@ const FooterMobile = (props: Props) => {
 						</Link>
 					)}
 					{phone && (
-						<Link href="/projects" passHref>
+						<Link href={`tel:${phone}`} passHref>
 							<MenuLink className="type-h3">
 								{phone}
 							</MenuLink>

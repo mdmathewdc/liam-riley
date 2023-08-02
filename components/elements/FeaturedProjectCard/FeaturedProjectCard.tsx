@@ -7,11 +7,12 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, motionValue, useScroll, useTransform } from 'framer-motion';
 import MuxPlayer from '@mux/mux-player-react';
 import { useMousePosition } from '../../../hooks/useMousePosition';
+import AnimatedCircleWrapper from '../AnimatedCircleWrapper';
 
 type StyledProps = {
-	$fontSize: string;
-	$lineHeight: string;
-	$isActive: string | boolean;
+	$fontSize?: string;
+	$lineHeight?: string;
+	$isActive?: string | boolean;
 }
 
 type Props = {
@@ -28,6 +29,10 @@ const FeaturedProjectCardWrapper = styled(motion.div)`
 	transform-origin: center left;
 	position: relative;
 	z-index: 1;
+
+	* {
+		background: transparent !important;
+	}
 
 	&:hover {
 		z-index: 10;
@@ -114,10 +119,6 @@ const Client = styled.p`
 		font-size: 0.875rem !important;
 		line-height: 1 !important;
 	}
-
-	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-		/* display: none; */
-	}
 `;
 
 const FeaturedProjectSnippet = styled(motion.div)`
@@ -187,13 +188,13 @@ const FeaturedProjectCard = (props: Props) => {
 	const [windowHeight, setWindowHeight] = useState(0);
 	const [windowWidth, setWindowWidth] = useState(0);
 	const [distanceToTop, setDistanceToTop] = useState(0);
-	const [snippetVideo, setSnippetVideo] = useState<boolean | string>(false);
+	const [snippetVideo, setSnippetVideo] = useState<string | boolean>(false);
 
 	const position = useMousePosition();
 
 	let mouseXPosition = position.x;
 
-	const formattedIndex = index < 10 ? `0${index}` : index;
+	const formattedIndex = (index + 1) < 10 ? `0${index + 1}` : index + 1;
 
 	const ref = useRef<HTMLAnchorElement>(null);
 	const wrapperDiv = useRef<HTMLDivElement>(null);
@@ -275,9 +276,6 @@ const FeaturedProjectCard = (props: Props) => {
 		}
 	};
 
-	console.log('data', data);
-	
-
 	return (
 		<FeaturedProjectCardWrapper
 			className="featured-project-card"
@@ -307,7 +305,7 @@ const FeaturedProjectCard = (props: Props) => {
 							muted={true}
 						/>
 					</MobileSnippetWrapper>
-					<Link href={`/projects/${data?.slug}`} passHref>
+					<Link href={`/projects/${data?.slug?.current}`} passHref>
 						<TitleWrapper
 							ref={ref}
 							onMouseOver={() => setSnippetVideo(data?.gallery[0]?.asset?.playbackId)}
@@ -315,14 +313,16 @@ const FeaturedProjectCard = (props: Props) => {
 							className="featured-project-card__title-wrapper"
 						>
 							{data?.title && (
-								<Title
-									className="type-h1"
-									$fontSize={fontSize}
-									$lineHeight={lineHeight}
-									$isActive={snippetVideo}
-								>
-									{data.title}
-								</Title>
+								<AnimatedCircleWrapper>
+									<Title
+										className="type-h1"
+										$fontSize={fontSize}
+										$lineHeight={lineHeight}
+										$isActive={snippetVideo}
+									>
+										{data.title}
+									</Title>
+								</AnimatedCircleWrapper>
 							)}
 							{data?.client && (
 								<Client
