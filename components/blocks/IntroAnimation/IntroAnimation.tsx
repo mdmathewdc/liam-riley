@@ -163,7 +163,9 @@ const IntroAnimation = (props: Props) => {
 					windowHeight={windowHeight}
 					lightColour={lightColour}
 				/>
-				<VideoWrapper style={{ height, width }}>
+				<VideoWrapper
+					style={{ height, width }}
+				>
 					{title && (
 						<TitleOuterWrapper>
 							<LayoutWrapper>
@@ -218,6 +220,7 @@ const IntroAnimation = (props: Props) => {
 							loop={true}
 							thumbnailTime={0}
 							muted={true}
+							playsInline={true}
 						/>
 					)}
 				</VideoWrapper>

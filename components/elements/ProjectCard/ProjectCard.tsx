@@ -11,6 +11,10 @@ import MuxPlayer from "@mux/mux-player-react/lazy";
 import { useState } from 'react';
 import AnimatedLineWrapper from '../AnimatedLineWrapper';
 
+type StyledProps = {
+	$isHovered?: boolean;
+}
+
 type Props = {
 	category: string;
 	client: string;
@@ -19,9 +23,19 @@ type Props = {
 	slug: string;
 	title: string;
 	year: number;
+	setIsHovered: (isHovered: boolean) => void;
+	isHovered: boolean;
 }
 
-const ProjectCardWrapper = styled.div`
+const ProjectCardWrapper = styled.div<StyledProps>`
+	opacity: ${(props) => props.$isHovered ? 0.6 : 1};
+
+	transition: opacity var(--transition-speed-default) var(--transition-ease);
+
+	&:hover {
+		opacity: 1 !important;
+	}
+
 	&:not(:last-child) {
 		margin-bottom: ${pxToRem(64)};
 
@@ -120,7 +134,8 @@ const ProjectCard = (props: Props) => {
 		gallery,
 		slug,
 		title,
-		year,
+		setIsHovered,
+		isHovered
 	} = props;
 
 	const [creditsIsActive, setCreditsIsActive] = useState(false);
@@ -136,7 +151,11 @@ const ProjectCard = (props: Props) => {
 	});
 
 	return (
-		<ProjectCardWrapper ref={ref}>
+		<ProjectCardWrapper
+			ref={ref}
+			$isHovered={isHovered}
+			className="project-card-wrapper"
+		>
 			<ContentWrapper>
 				<LayoutWrapper>
 					<LayoutGrid>
@@ -152,6 +171,7 @@ const ProjectCard = (props: Props) => {
 										loading="viewport"
 										style={{ aspectRatio: 16/9 }}
 										muted={true}
+										playsInline={true}
 									/>
 								)}
 							</MobileMuxWrapper>
@@ -199,6 +219,7 @@ const ProjectCard = (props: Props) => {
 				credits={credits}
 				creditsIsActive={creditsIsActive}
 				slug={slug}
+				setIsHovered={setIsHovered}
 			/>
 		</ProjectCardWrapper>
 	);

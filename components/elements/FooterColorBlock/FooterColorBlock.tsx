@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -14,7 +15,7 @@ type Props = {
 	]
 };
 
-const FooterColorBlockWrapper = styled.div`
+const FooterColorBlockWrapper = styled(motion.div)`
 	grid-column: span 1;
 	width: 100%;
 	padding-top: 100%;
@@ -30,6 +31,23 @@ const FooterColorBlockInner = styled.div<StyledProps>`
 	width: 100%;
 	inset: 0;
 `;
+
+const childVariants = {
+	hidden: {
+		opacity: 0,
+		transition: {
+			duration: 0.2,
+			ease: 'easeInOut'
+		}
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			duration: 0.2,
+			ease: 'easeInOut'
+		}
+	}
+};
 
 const FooterColorBlock = (props: Props) => {
 	const {
@@ -49,6 +67,7 @@ const FooterColorBlock = (props: Props) => {
 			className="footer-color-block"
 			onMouseOver={() => handleHoverColor()}
 			onMouseOut={() => handleHoverColor()}
+			variants={childVariants}
 		>
 			<FooterColorBlockInner $hex={hoverColor} />
 		</FooterColorBlockWrapper>

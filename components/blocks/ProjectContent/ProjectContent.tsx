@@ -83,6 +83,17 @@ const ProjectContent = (props: Props) => {
 		rootMargin: '-50px'
 	});
 
+	const components = {
+		marks: {
+			link: ({value, children}) => {
+				const { blank, href } = value
+				return blank ?
+				<a href={href} target="_blank" rel="noopener">{children}</a>
+				: <a href={href} target="_blank" rel="noopener">{children}</a>
+			}
+		}
+	};
+
 	return (
 		<ProjectContentWrapper ref={ref}>
 			<LayoutWrapper>
@@ -133,6 +144,7 @@ const ProjectContent = (props: Props) => {
 								<PortableTextWrapper className="type-label">
 									<PortableText
 										value={credits}
+										components={components}
 									/>
 								</PortableTextWrapper>
 							</CreditsWrapper>

@@ -6,9 +6,11 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
 import { AnimatePresence, motion } from 'framer-motion';
 import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
+import { useState } from 'react';
 
 type StyledProps = {
-	$isLoading: boolean;
+	$isLoading?: boolean;
+	$isHovered?: boolean;
 }
 
 type Props = {
@@ -26,6 +28,10 @@ const ProjectsListWrapper = styled.section<StyledProps>`
 	opacity: ${(props) => props.$isLoading ? 0.5 : 1};
 
 	transition: opacity var(--transition-speed-default) var(--transition-ease);
+
+	.project-card-wrapper {
+		opacity: ${(props) => props.$isHovered ? 0.5 : 1};
+	}
 `;
 
 const LoadMoreWrapper = styled(motion.div)<StyledProps>`
@@ -67,10 +73,15 @@ const ProjectsList = (props: Props) => {
 		isLoading
 	} = props;
 
+	const [isHovered, setIsHovered] = useState(false);
+
 	const hasProjects = projects?.length > 0;
 
 	return (
-		<ProjectsListWrapper $isLoading={isLoading}>
+		<ProjectsListWrapper
+			$isLoading={isLoading}
+			$isHovered={isHovered}
+		>
 			{hasProjects && projects.map((item, i) => (
 				<ProjectCard
 					category={item?.category}
@@ -81,6 +92,8 @@ const ProjectsList = (props: Props) => {
 					title={item?.title}
 					year={item?.year}
 					key={i}
+					setIsHovered={setIsHovered}
+					isHovered={isHovered}
 				/>
 			))}
 			<AnimatePresence>

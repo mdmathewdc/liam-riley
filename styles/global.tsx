@@ -177,6 +177,11 @@ export const GlobalStyles = createGlobalStyle`
 	.type-small {
 		font-size: ${theme.size.small};
 		line-height: 1.2;
+
+		* {
+			font-size: ${theme.size.small};
+			line-height: 1.2;
+		}
 	}
 
 	.type-label {
@@ -209,6 +214,12 @@ export const GlobalStyles = createGlobalStyle`
 		&--tiny {
 			.line-wrapper {
 				bottom: -4px !important;
+			}
+		}
+
+		&--slow {
+			path {
+				transition: all var(--transition-speed-extra-slow) var(--transition-ease);
 			}
 		}
 	}

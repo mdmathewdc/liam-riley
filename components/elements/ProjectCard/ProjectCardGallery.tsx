@@ -13,6 +13,7 @@ type Props = {
 	credits: [];
 	creditsIsActive: boolean;
 	slug: string;
+	setIsHovered: (isHovered: boolean) => void;
 }
 
 const ProjectCardGalleryWrapper = styled(motion.div)`
@@ -36,7 +37,7 @@ const EmblaContainer = styled.div`
 	transition: padding-left var(--transition-speed-default) var(--transition-ease);
 
 	&:hover {
-		padding-left: calc(20% - 40px);
+		padding-left: calc(20% - 50px);
 	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
@@ -64,7 +65,8 @@ const ProjectCardGallery = (props: Props) => {
 		gallery,
 		credits,
 		creditsIsActive,
-		slug
+		slug,
+		setIsHovered
 	} = props;
 
 	const hasSlides = gallery?.length > 0;
@@ -98,6 +100,8 @@ const ProjectCardGallery = (props: Props) => {
 				inView ? 'view-element-left-right--in-view' : ''
 			}`}
 			ref={ref}
+			onMouseOver={() => setIsHovered(true)}
+			onMouseOut={() => setIsHovered(false)}			
 		>
 			{hasSlides && (
 				<Link href={`/projects/${slug}`} passHref>

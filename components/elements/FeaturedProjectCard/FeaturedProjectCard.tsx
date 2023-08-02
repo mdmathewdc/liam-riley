@@ -302,6 +302,7 @@ const FeaturedProjectCard = (props: Props) => {
 							thumbnailTime={0}
 							preload="auto"
 							muted={true}
+							playsInline={true}
 						/>
 					</MobileSnippetWrapper>
 					<Link href={`/projects/${data?.slug?.current}`} passHref>
@@ -355,6 +356,7 @@ const FeaturedProjectCard = (props: Props) => {
 								thumbnailTime={0}
 								preload="auto"
 								muted={true}
+								playsInline={true}
 							/>
 						</FeaturedProjectSnippetInner>
 					</FeaturedProjectSnippet>

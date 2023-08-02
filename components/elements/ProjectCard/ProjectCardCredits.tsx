@@ -41,12 +41,23 @@ const wrapperVariants = {
 };
 
 const ProjectCardCredits = ({ credits, creditsIsActive }: Props) => {
+	const components = {
+		marks: {
+			link: ({value, children}) => {
+				const { blank, href } = value
+				return blank ?
+				<a href={href} target="_blank" rel="noopener">{children}</a>
+				: <a href={href} target="_blank" rel="noopener">{children}</a>
+			}
+		}
+	};
+
 	return (
 		<>
 			<AnimatePresence>
 				{creditsIsActive && (
 					<ProjectCardCreditsWrapper
-						className="type-label"
+						className="type-small"
 						variants={wrapperVariants}
 						initial='hidden'
 						animate='visible'
@@ -55,6 +66,7 @@ const ProjectCardCredits = ({ credits, creditsIsActive }: Props) => {
 						{credits && (
 							<PortableText
 								value={credits}
+								components={components}
 							/>
 						)}
 					</ProjectCardCreditsWrapper>

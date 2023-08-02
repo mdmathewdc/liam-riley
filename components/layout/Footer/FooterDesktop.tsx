@@ -140,7 +140,7 @@ const FooterDesktop = (props: Props) => {
 				<LinksWrapper>
 					{email && (
 						<Link href={`mailto:${email}`} passHref>
-							<MenuLink className="type-h3 animated-line-parent">
+							<MenuLink className="type-h3 animated-line-parent animated-line-parent--slow">
 								{email}
 								<AnimatedLineWrapper />
 							</MenuLink>
@@ -148,7 +148,7 @@ const FooterDesktop = (props: Props) => {
 					)}
 					{phone && (
 						<Link href={`tel:${phone}`} passHref>
-							<MenuLink className="type-h3 animated-line-parent">
+							<MenuLink className="type-h3 animated-line-parent animated-line-parent--slow">
 								{phone}
 								<AnimatedLineWrapper />
 							</MenuLink>
@@ -261,7 +261,7 @@ const FooterDesktop = (props: Props) => {
 							</Text>
 							<Link href="https://tayte.co/" passHref>
 								<SmallMenuLink
-									className="type-small animated-line-parent"
+									className="type-small animated-line-parent animated-line-parent--small"
 									target="_blank"
 								>
 									tayte.co

@@ -21,6 +21,7 @@ const LineWrapper = styled.div`
 		stroke-dasharray: 1000;
 		stroke-dashoffset: 1000;
 		width: 100%;
+		stroke: var(--colour-dark);
 
 		transition: all var(--transition-speed-slow) var(--transition-ease);
 	}

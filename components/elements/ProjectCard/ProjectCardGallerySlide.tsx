@@ -28,6 +28,7 @@ const ProjectCardGallerySlide = ({ data }: Props) => {
 					thumbnailTime={0}
 					ref={videoRef}
 					style={{ aspectRatio: 16/9 }}
+					playsInline={true}
 				/>
 			)}
 		</MuxWrapper>
