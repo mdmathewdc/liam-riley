@@ -17,6 +17,7 @@ type Props = {
 
 const ProjectCardGalleryWrapper = styled(motion.div)`
 	position: relative;
+	overflow: hidden;
 
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
 		display: none;

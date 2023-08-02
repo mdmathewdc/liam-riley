@@ -5,6 +5,7 @@ import pxToRem from '../../../utils/pxToRem';
 import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
 import { AnimatePresence, motion } from 'framer-motion';
+import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
 
 type StyledProps = {
 	$isLoading: boolean;
@@ -94,10 +95,11 @@ const ProjectsList = (props: Props) => {
 								$isLoading={isLoading}
 							>
 								<LoadMoreTrigger
-									className="type-h3"
+									className="type-h3 animated-line-parent"
 									onClick={() => handleLoadMore()}
 								>
 									{isLoading ? 'Loading...' : 'Load More'}
+									<AnimatedLineWrapper />
 								</LoadMoreTrigger>
 							</LoadMoreWrapper>
 						</LayoutGrid>

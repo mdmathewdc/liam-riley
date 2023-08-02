@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
 import Link from 'next/link';
 import SecondaryLogo from '../../svgs/SecondaryLogo';
 import LayoutGrid from '../../common/LayoutGrid';
 import { useInView } from 'react-intersection-observer';
+import AnimatedCircleWrapper from '../../elements/AnimatedLineWrapper';
+import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
 
 type Props = {
 	phone: string;
@@ -47,6 +49,7 @@ const LinksWrapper = styled.div`
 
 const MenuLink = styled.a`
 	text-decoration: none;
+	position: relative;
 
 	&:not(:last-child) {
 		margin-bottom: ${pxToRem(8)};
@@ -57,10 +60,7 @@ const SmallMenuLink = styled.a`
 	text-decoration: none;
 	line-height: 1.2;
 	white-space: pre;
-
-	&:hover {
-		text-decoration: underline;
-	}
+	position: relative;
 `;
 
 const LogoWrapper = styled.div`
@@ -140,15 +140,17 @@ const FooterDesktop = (props: Props) => {
 				<LinksWrapper>
 					{email && (
 						<Link href={`mailto:${email}`} passHref>
-							<MenuLink className="type-h3">
+							<MenuLink className="type-h3 animated-line-parent">
 								{email}
+								<AnimatedLineWrapper />
 							</MenuLink>
 						</Link>
 					)}
 					{phone && (
 						<Link href={`tel:${phone}`} passHref>
-							<MenuLink className="type-h3">
+							<MenuLink className="type-h3 animated-line-parent">
 								{phone}
+								<AnimatedLineWrapper />
 							</MenuLink>
 						</Link>
 					)}
@@ -171,15 +173,21 @@ const FooterDesktop = (props: Props) => {
 						<FooterCell>
 							{email && (
 								<Link href={`mailto:${email}`} passHref>
-									<SmallMenuLink className="type-small">
+									<SmallMenuLink
+										className="type-small animated-line-parent animated-line-parent--small"
+									>
 										{email}
+										<AnimatedLineWrapper strokeWidth={2} />
 									</SmallMenuLink>
 								</Link>
 							)}
 							{phone && (
 								<Link href={`tel:${phone}`} passHref>
-									<SmallMenuLink className="type-small">
+									<SmallMenuLink
+										className="type-small animated-line-parent animated-line-parent--small"
+									>
 										{phone}
+										<AnimatedLineWrapper strokeWidth={2} />
 									</SmallMenuLink>
 								</Link>
 							)}
@@ -192,30 +200,33 @@ const FooterDesktop = (props: Props) => {
 								{instagramUrl && (
 									<Link href={instagramUrl} passHref>
 										<SmallMenuLink
-											className="type-small"
+											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
 										>
 											Instagram{", "}
+											<AnimatedLineWrapper strokeWidth={2} />
 										</SmallMenuLink>
 									</Link>
 								)}
 								{vimeoUrl && (
 									<Link href={vimeoUrl} passHref>
 										<SmallMenuLink
-											className="type-small"
+											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
 										>
 											Vimeo{", "}
+											<AnimatedLineWrapper strokeWidth={2} />
 										</SmallMenuLink>
 									</Link>
 								)}
 								{linkedInUrl && (
 									<Link href={linkedInUrl} passHref>
 										<SmallMenuLink
-											className="type-small"
+											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
 										>
 											LinkedIn
+											<AnimatedLineWrapper strokeWidth={2} />
 										</SmallMenuLink>
 									</Link>
 								)}
@@ -227,13 +238,19 @@ const FooterDesktop = (props: Props) => {
 							</Text>
 							<FooterBottomCell>
 								<Link href="/" passHref>
-									<SmallMenuLink className="type-small">
+									<SmallMenuLink
+										className="type-small animated-line-parent animated-line-parent--small"
+									>
 										Home{", "}
+										<AnimatedLineWrapper strokeWidth={2} />
 									</SmallMenuLink>
 								</Link>
 								<Link href="/projects" passHref>
-									<SmallMenuLink className="type-small">
+									<SmallMenuLink
+										className="type-small animated-line-parent animated-line-parent--small"
+									>
 										Projects
+										<AnimatedLineWrapper strokeWidth={2} />
 									</SmallMenuLink>
 								</Link>
 							</FooterBottomCell>
@@ -244,10 +261,11 @@ const FooterDesktop = (props: Props) => {
 							</Text>
 							<Link href="https://tayte.co/" passHref>
 								<SmallMenuLink
-									className="type-small"
+									className="type-small animated-line-parent"
 									target="_blank"
 								>
 									tayte.co
+									<AnimatedLineWrapper strokeWidth={2} />
 								</SmallMenuLink>
 							</Link>
 						</CreditFooterCell>

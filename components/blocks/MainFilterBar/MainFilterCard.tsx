@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
 import { motion } from 'framer-motion';
+import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
 
 type StyledProps = {
 	$isActive: boolean;
@@ -17,16 +18,26 @@ type Props = {
 const MainFilterCardTrigger = styled(motion.button)`
 	display: flex;
 	align-items: flex-end;
+
+	&:hover {
+		div {
+			opacity: 1 !important;
+		}
+	}
 `;
 
 const Title = styled.div<StyledProps>`
 	margin-right: ${pxToRem(8)};
 	opacity: ${(props) => props.$isActive ? 1 : 0.5};
+
+	transition: all var(--transition-speed-default) var(--transition-ease);
 `;
 
 const Count = styled.div<StyledProps>`
 	line-height: 1.2;
 	opacity: ${(props) => props.$isActive ? 1 : 0.5};
+
+	transition: all var(--transition-speed-default) var(--transition-ease);
 `;
 
 const childVariants = {

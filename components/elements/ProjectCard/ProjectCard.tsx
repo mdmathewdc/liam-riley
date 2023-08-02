@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import MuxPlayer from "@mux/mux-player-react/lazy"; 
 import { useState } from 'react';
+import AnimatedLineWrapper from '../AnimatedLineWrapper';
 
 type Props = {
 	category: string;
@@ -181,12 +182,13 @@ const ProjectCard = (props: Props) => {
 								/>
 							</MainDesktopContentWrapper>
 							<CreditsTrigger
-								className={`type-label view-element-fade-in ${
+								className={`animated-line-parent animated-line-parent--small type-label view-element-fade-in ${
 									inView ? 'view-element-fade-in--in-view' : ''
 								}`}
 								onClick={() => setCreditsIsActive(!creditsIsActive)}
 							>
 								{creditsIsActive ? 'Hide Credits' : 'Credits'}
+								<AnimatedLineWrapper strokeWidth={2} />
 							</CreditsTrigger>
 						</ContentInner>
 					</LayoutGrid>

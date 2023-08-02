@@ -189,6 +189,30 @@ export const GlobalStyles = createGlobalStyle`
 		}
 	}
 
+	.animated-line-parent {
+		position: relative;
+		text-decoration: none;
+
+		&:hover {
+			path {
+				stroke-dasharray: 1000;
+				stroke-dashoffset: 0;
+			}
+		}
+
+		&--small {
+			.line-wrapper {
+				bottom: -7px !important;
+			}
+		}
+
+		&--tiny {
+			.line-wrapper {
+				bottom: -4px !important;
+			}
+		}
+	}
+
 	.view-element-fade-in
 	{
 		opacity: 0;

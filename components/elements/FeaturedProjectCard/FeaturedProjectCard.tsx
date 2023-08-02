@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, motionValue, useScroll, useTransform } from 'framer-motion';
 import MuxPlayer from '@mux/mux-player-react';
 import { useMousePosition } from '../../../hooks/useMousePosition';
-import AnimatedCircleWrapper from '../AnimatedCircleWrapper';
 
 type StyledProps = {
 	$fontSize?: string;
@@ -313,16 +312,14 @@ const FeaturedProjectCard = (props: Props) => {
 							className="featured-project-card__title-wrapper"
 						>
 							{data?.title && (
-								<AnimatedCircleWrapper>
-									<Title
-										className="type-h1"
-										$fontSize={fontSize}
-										$lineHeight={lineHeight}
-										$isActive={snippetVideo}
-									>
-										{data.title}
-									</Title>
-								</AnimatedCircleWrapper>
+								<Title
+									className="type-h1"
+									$fontSize={fontSize}
+									$lineHeight={lineHeight}
+									$isActive={snippetVideo}
+								>
+									{data.title}
+								</Title>
 							)}
 							{data?.client && (
 								<Client

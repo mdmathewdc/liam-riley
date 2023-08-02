@@ -9,6 +9,7 @@ import throttle from 'lodash.throttle';
 import { useRouter } from 'next/router';
 import useViewportWidth from '../../../hooks/useViewportWidth';
 import MenuColourGrid from '../../elements/MenuColourGrid';
+import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
 
 type StyledProps = {
 	$isActive: boolean;
@@ -68,10 +69,6 @@ const MenuLinks = styled.div`
 
 const MenuLink = styled.a`
 	text-decoration: none;
-
-	&:hover {
-		text-decoration: underline;
-	}
 `;
 
 const MenuTrigger = styled.button`
@@ -161,30 +158,38 @@ const Header = (props: Props) => {
 					<MenuLinksWrapper>
 						<MenuLinks>
 							<Link href="/" passHref>
-								<MenuLink className="type-label">Home</MenuLink>
+								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+									Home
+									<AnimatedLineWrapper strokeWidth={2} />
+								</MenuLink>
 							</Link>
 							<Link href="/projects" passHref>
-								<MenuLink className="type-label">Projects</MenuLink>
+								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+									Projects
+									<AnimatedLineWrapper strokeWidth={2} />
+								</MenuLink>
 							</Link>
 						</MenuLinks>
 						<MenuLinks>
 							{instagramUrl && (
 								<Link href={instagramUrl} passHref>
 									<MenuLink
-										className="type-label"
+										className="type-label animated-line-parent animated-line-parent--tiny"
 										target="_blank"
 									>
 										Instagram
+										<AnimatedLineWrapper strokeWidth={2} />
 									</MenuLink>
 								</Link>
 							)}
 							{vimeoUrl && (
 								<Link href={vimeoUrl} passHref>
 									<MenuLink
-										className="type-label"
+										className="type-label animated-line-parent animated-line-parent--tiny"
 										target="_blank"
 									>
 										Vimeo
+										<AnimatedLineWrapper strokeWidth={2} />
 									</MenuLink>
 								</Link>
 							)}
@@ -192,15 +197,17 @@ const Header = (props: Props) => {
 						<MenuLinks>
 							{email && (
 								<Link href={`mailto:${email}`} passHref>
-									<MenuLink className="type-label">
+									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 										{email}
+										<AnimatedLineWrapper strokeWidth={2} />
 									</MenuLink>
 								</Link>
 							)}
 							{phone && (
 								<Link href={`tel:${phone}`} passHref>
-									<MenuLink className="type-label">
+									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 										{phone}
+										<AnimatedLineWrapper strokeWidth={2} />
 									</MenuLink>
 								</Link>
 							)}
