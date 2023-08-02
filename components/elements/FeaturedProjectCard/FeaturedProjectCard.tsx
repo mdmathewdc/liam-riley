@@ -142,8 +142,15 @@ const FeaturedProjectSnippet = styled(motion.div)`
 		inset: 0;
 		width: 300px;
 		height: 169px;
+		background: transparent !important;
+		background-color: transparent !important;
 
 		transition: unset !important;
+
+		* {
+			background: transparent !important;
+			background-color: transparent !important;
+		}
 
 		--media-object-fit: cover;
 		--media-object-position: center;
