@@ -10,6 +10,7 @@ import { useInView } from 'react-intersection-observer';
 import MuxPlayer from "@mux/mux-player-react/lazy"; 
 import { useState } from 'react';
 import AnimatedLineWrapper from '../AnimatedLineWrapper';
+import Link from 'next/link';
 
 type StyledProps = {
 	$isHovered?: boolean;
@@ -81,7 +82,7 @@ const CreditsTrigger = styled.button`
 	}
 `;
 
-const MobileMuxWrapper = styled.div`
+const MobileMuxWrapper = styled.a`
 	display: none;
 
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
@@ -160,29 +161,33 @@ const ProjectCard = (props: Props) => {
 				<LayoutWrapper>
 					<LayoutGrid>
 						<ContentInner>
-							<MobileMuxWrapper>
-								{gallery?.length > 0 && gallery[0]?.asset?.playbackId && (
-									<MuxPlayer
-										streamType="on-demand"
-										playbackId={gallery[0]?.asset?.playbackId}
-										autoPlay="muted"
-										loop={true}
-										thumbnailTime={0}
-										loading="viewport"
-										style={{ aspectRatio: 16/9 }}
-										muted={true}
-										playsInline={true}
-									/>
-								)}
-							</MobileMuxWrapper>
-							<MainMobileContentWrapper>
-								<MobileContentTitle className="type-label">
-									{client} - {title}
-									</MobileContentTitle>
-								<MobileContentCategory className="type-label">
-									{format(category)}
-								</MobileContentCategory>
-							</MainMobileContentWrapper>
+							<Link href={`/projects/${slug}`} passHref scroll={false}>
+								<MobileMuxWrapper>
+									{gallery?.length > 0 && gallery[0]?.asset?.playbackId && (
+										<MuxPlayer
+											streamType="on-demand"
+											playbackId={gallery[0]?.asset?.playbackId}
+											autoPlay="muted"
+											loop={true}
+											thumbnailTime={0}
+											loading="viewport"
+											style={{ aspectRatio: 16/9 }}
+											muted={true}
+											playsInline={true}
+										/>
+									)}
+								</MobileMuxWrapper>
+							</Link>
+							<Link href={`/projects/${slug}`} passHref scroll={false}>
+								<MainMobileContentWrapper>
+									<MobileContentTitle className="type-label">
+										{client} - {title}
+										</MobileContentTitle>
+									<MobileContentCategory className="type-label">
+										{format(category)}
+									</MobileContentCategory>
+								</MainMobileContentWrapper>
+							</Link>
 							<MainDesktopContentWrapper
 								variants={wrapperVariants}
 								initial='hidden'

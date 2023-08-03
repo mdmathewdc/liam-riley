@@ -139,7 +139,7 @@ const FooterDesktop = (props: Props) => {
 				)}
 				<LinksWrapper>
 					{email && (
-						<Link href={`mailto:${email}`} passHref>
+						<Link href={`mailto:${email}`} passHref scroll={false}>
 							<MenuLink className="type-h3 animated-line-parent animated-line-parent--slow">
 								{email}
 								<AnimatedLineWrapper />
@@ -147,7 +147,7 @@ const FooterDesktop = (props: Props) => {
 						</Link>
 					)}
 					{phone && (
-						<Link href={`tel:${phone}`} passHref>
+						<Link href={`tel:${phone}`} passHref scroll={false}>
 							<MenuLink className="type-h3 animated-line-parent animated-line-parent--slow">
 								{phone}
 								<AnimatedLineWrapper />
@@ -172,7 +172,7 @@ const FooterDesktop = (props: Props) => {
 						</FooterCell>
 						<FooterCell>
 							{email && (
-								<Link href={`mailto:${email}`} passHref>
+								<Link href={`mailto:${email}`} passHref scroll={false}>
 									<SmallMenuLink
 										className="type-small animated-line-parent animated-line-parent--small"
 									>
@@ -182,7 +182,7 @@ const FooterDesktop = (props: Props) => {
 								</Link>
 							)}
 							{phone && (
-								<Link href={`tel:${phone}`} passHref>
+								<Link href={`tel:${phone}`} passHref scroll={false}>
 									<SmallMenuLink
 										className="type-small animated-line-parent animated-line-parent--small"
 									>
@@ -198,7 +198,7 @@ const FooterDesktop = (props: Props) => {
 							</Text>
 							<FooterBottomCell>
 								{instagramUrl && (
-									<Link href={instagramUrl} passHref>
+									<Link href={instagramUrl} passHref scroll={false}>
 										<SmallMenuLink
 											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
@@ -209,7 +209,7 @@ const FooterDesktop = (props: Props) => {
 									</Link>
 								)}
 								{vimeoUrl && (
-									<Link href={vimeoUrl} passHref>
+									<Link href={vimeoUrl} passHref scroll={false}>
 										<SmallMenuLink
 											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
@@ -220,7 +220,7 @@ const FooterDesktop = (props: Props) => {
 									</Link>
 								)}
 								{linkedInUrl && (
-									<Link href={linkedInUrl} passHref>
+									<Link href={linkedInUrl} passHref scroll={false}>
 										<SmallMenuLink
 											className="type-small animated-line-parent animated-line-parent--small"
 											target="_blank"
@@ -237,7 +237,7 @@ const FooterDesktop = (props: Props) => {
 								Navigation
 							</Text>
 							<FooterBottomCell>
-								<Link href="/" passHref>
+								<Link href="/" passHref scroll={false}>
 									<SmallMenuLink
 										className="type-small animated-line-parent animated-line-parent--small"
 									>
@@ -245,7 +245,7 @@ const FooterDesktop = (props: Props) => {
 										<AnimatedLineWrapper strokeWidth={2} />
 									</SmallMenuLink>
 								</Link>
-								<Link href="/projects" passHref>
+								<Link href="/projects" passHref scroll={false}>
 									<SmallMenuLink
 										className="type-small animated-line-parent animated-line-parent--small"
 									>
@@ -259,7 +259,7 @@ const FooterDesktop = (props: Props) => {
 							<Text className="type-small">
 								Built by
 							</Text>
-							<Link href="https://tayte.co/" passHref>
+							<Link href="https://tayte.co/" passHref scroll={false}>
 								<SmallMenuLink
 									className="type-small animated-line-parent animated-line-parent--small"
 									target="_blank"

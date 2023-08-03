@@ -5,7 +5,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Menu from './Menu';
 
-const Main = styled.main``;
+const Main = styled.main`
+	position: relative;
+	z-index: 1;
+`;
 
 type Props = {
 	children: ReactNode;

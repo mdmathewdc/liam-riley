@@ -49,7 +49,7 @@ const MenuColourGrid = (props: Props) => {
 	return (
 		<>
 			{hasColors && (
-				<Link href="/photography" passHref>
+				<Link href="/photography" passHref scroll={false}>
 					<MenuColourGridWrapper
 						className="menu-colour-grid"
 						onMouseOver={() => handleNewRandomNineColors()}

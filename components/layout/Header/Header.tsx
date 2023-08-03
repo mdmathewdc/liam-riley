@@ -120,6 +120,17 @@ const Header = (props: Props) => {
 	};
 
 	useEffect(() => {
+		const currentScrollPos = window.pageYOffset;
+		if (router.pathname !== '/' && currentScrollPos === 0) {
+			setIsActive(true);
+		}
+
+		if (router.pathname === '/' && currentScrollPos === 0) {
+			setIsActive(false);
+		}
+	}, [router.pathname]);
+
+	useEffect(() => {
 		if (viewportWidth === 'tabletPortrait' || viewportWidth === 'mobile') {
 			setIsActive(true);
 			return;
@@ -133,37 +144,25 @@ const Header = (props: Props) => {
 		};
 	}, [viewportWidth, router.pathname]);
 
-	useEffect(() => {
-		const currentScrollPos = window.pageYOffset;
-		if (router.pathname !== '/' && currentScrollPos === 0) {
-			setIsActive(true);
-		}
-
-		if (router.pathname === '/' && currentScrollPos === 0) {
-			setIsActive(false);
-		}
-	}, [router.pathname]);
-	
-
 	return (
 		<HeaderWrapper
-			className="header"
+			className="header performance"
 			$isActive={isActive}
 		>
 			<LayoutWrapper>
 				<LayoutGrid>
-					<Link href="/" passHref>
+					<Link href="/" passHref scroll={false}>
 						<Logo className="type-label">Liam Riley</Logo>
 					</Link>
 					<MenuLinksWrapper>
 						<MenuLinks>
-							<Link href="/" passHref>
+							<Link href="/" passHref scroll={false}>
 								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 									Home
 									<AnimatedLineWrapper strokeWidth={2} />
 								</MenuLink>
 							</Link>
-							<Link href="/projects" passHref>
+							<Link href="/projects" passHref scroll={false}>
 								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 									Projects
 									<AnimatedLineWrapper strokeWidth={2} />
@@ -172,7 +171,7 @@ const Header = (props: Props) => {
 						</MenuLinks>
 						<MenuLinks>
 							{instagramUrl && (
-								<Link href={instagramUrl} passHref>
+								<Link href={instagramUrl} passHref scroll={false}>
 									<MenuLink
 										className="type-label animated-line-parent animated-line-parent--tiny"
 										target="_blank"
@@ -183,7 +182,7 @@ const Header = (props: Props) => {
 								</Link>
 							)}
 							{vimeoUrl && (
-								<Link href={vimeoUrl} passHref>
+								<Link href={vimeoUrl} passHref scroll={false}>
 									<MenuLink
 										className="type-label animated-line-parent animated-line-parent--tiny"
 										target="_blank"
@@ -196,7 +195,7 @@ const Header = (props: Props) => {
 						</MenuLinks>
 						<MenuLinks>
 							{email && (
-								<Link href={`mailto:${email}`} passHref>
+								<Link href={`mailto:${email}`} passHref scroll={false}>
 									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 										{email}
 										<AnimatedLineWrapper strokeWidth={2} />
@@ -204,7 +203,7 @@ const Header = (props: Props) => {
 								</Link>
 							)}
 							{phone && (
-								<Link href={`tel:${phone}`} passHref>
+								<Link href={`tel:${phone}`} passHref scroll={false}>
 									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
 										{phone}
 										<AnimatedLineWrapper strokeWidth={2} />

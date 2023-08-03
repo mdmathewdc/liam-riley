@@ -41,6 +41,7 @@ const LoadMoreWrapper = styled(motion.div)<StyledProps>`
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
 		padding-bottom: ${(props) => props.$isLoading ? pxToRem(1000) : 0};
+		margin-top: ${pxToRem(48)};
 	}
 `;
 

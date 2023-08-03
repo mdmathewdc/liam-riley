@@ -73,12 +73,12 @@ const FooterMobile = (props: Props) => {
 					<Title className="type-small">
 						Navigation
 					</Title>
-					<Link href="/" passHref>
+					<Link href="/" passHref scroll={false}>
 						<MenuLink className="type-h3">
 							Home
 						</MenuLink>
 					</Link>
-					<Link href="/projects" passHref>
+					<Link href="/projects" passHref scroll={false}>
 						<MenuLink className="type-h3">
 							Projects
 						</MenuLink>
@@ -89,14 +89,14 @@ const FooterMobile = (props: Props) => {
 						Contact
 					</Title>
 					{email && (
-						<Link href={`mailto:${email}`} passHref>
+						<Link href={`mailto:${email}`} passHref scroll={false}>
 							<MenuLink className="type-h3">
 								{email}
 							</MenuLink>
 						</Link>
 					)}
 					{phone && (
-						<Link href={`tel:${phone}`} passHref>
+						<Link href={`tel:${phone}`} passHref scroll={false}>
 							<MenuLink className="type-h3">
 								{phone}
 							</MenuLink>
@@ -108,7 +108,7 @@ const FooterMobile = (props: Props) => {
 						Follow
 					</Title>
 					{instagramUrl && (
-						<Link href={instagramUrl} passHref>
+						<Link href={instagramUrl} passHref scroll={false}>
 							<MenuLink
 								className="type-h3"
 								target="_blank"
@@ -118,7 +118,7 @@ const FooterMobile = (props: Props) => {
 						</Link>
 					)}
 					{vimeoUrl && (
-						<Link href={vimeoUrl} passHref>
+						<Link href={vimeoUrl} passHref scroll={false}>
 							<MenuLink
 								className="type-h3"
 								target="_blank"
@@ -128,7 +128,7 @@ const FooterMobile = (props: Props) => {
 						</Link>
 					)}
 					{linkedInUrl && (
-						<Link href={linkedInUrl} passHref>
+						<Link href={linkedInUrl} passHref scroll={false}>
 							<MenuLink
 								className="type-h3"
 								target="_blank"
@@ -152,7 +152,7 @@ const FooterMobile = (props: Props) => {
 					<Text className="type-small">
 						Built by
 					</Text>
-					<Link href="https://tayte.co/" passHref>
+					<Link href="https://tayte.co/" passHref scroll={false}>
 						<MenuLink
 							className="type-small"
 							target="_blank"

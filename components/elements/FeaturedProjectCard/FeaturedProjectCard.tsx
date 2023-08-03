@@ -165,7 +165,7 @@ const FeaturedProjectSnippetInner = styled(motion.div)`
 	pointer-events: none;
 `;
 
-const MobileSnippetWrapper = styled.div`
+const MobileSnippetWrapper = styled.a`
 	display: none;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
@@ -293,19 +293,21 @@ const FeaturedProjectCard = (props: Props) => {
 					<Index $isActive={snippetVideo}>
 						{formattedIndex}
 					</Index>
-					<MobileSnippetWrapper>
-						<MuxPlayer
-							streamType="on-demand"
-							playbackId={data?.gallery[0]?.asset?.playbackId}
-							autoPlay="muted"
-							loop={true}
-							thumbnailTime={0}
-							preload="auto"
-							muted={true}
-							playsInline={true}
-						/>
-					</MobileSnippetWrapper>
-					<Link href={`/projects/${data?.slug?.current}`} passHref>
+					<Link href={`/projects/${data?.slug?.current}`} passHref scroll={false}>
+						<MobileSnippetWrapper>
+							<MuxPlayer
+								streamType="on-demand"
+								playbackId={data?.gallery[0]?.asset?.playbackId}
+								autoPlay="muted"
+								loop={true}
+								thumbnailTime={0}
+								preload="auto"
+								muted={true}
+								playsInline={true}
+							/>
+						</MobileSnippetWrapper>
+					</Link>
+					<Link href={`/projects/${data?.slug?.current}`} passHref scroll={false}>
 						<TitleWrapper
 							ref={ref}
 							onMouseOver={() => setSnippetVideo(data?.gallery[0]?.asset?.playbackId)}

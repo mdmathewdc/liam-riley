@@ -20,8 +20,6 @@ const FooterColorBlockWrapper = styled(motion.div)`
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
-
-	transition: all var(--transition-speed-default) var(--transition-ease);
 `;
 
 const FooterColorBlockInner = styled.div<StyledProps>`

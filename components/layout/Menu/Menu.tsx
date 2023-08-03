@@ -94,16 +94,16 @@ const Menu = (props: Props) => {
 						<LayoutWrapper>
 							<MenuInner>
 								<MenuLinks>
-									<Link href="/" passHref>
+									<Link href="/" passHref scroll={false}>
 										<MenuLink className="type-h1">Home</MenuLink>
 									</Link>
-									<Link href="/projects" passHref>
+									<Link href="/projects" passHref scroll={false}>
 										<MenuLink className="type-h1">Projects</MenuLink>
 									</Link>
 								</MenuLinks>
 								<MenuLinks>
 									{instagramUrl && (
-										<Link href={instagramUrl} passHref>
+										<Link href={instagramUrl} passHref scroll={false}>
 											<MenuLink
 												className="type-h1"
 												target="_blank"
@@ -113,7 +113,7 @@ const Menu = (props: Props) => {
 										</Link>
 									)}
 									{vimeoUrl && (
-										<Link href={vimeoUrl} passHref>
+										<Link href={vimeoUrl} passHref scroll={false}>
 											<MenuLink
 												className="type-h1"
 												target="_blank"
@@ -125,14 +125,14 @@ const Menu = (props: Props) => {
 								</MenuLinks>
 								<MenuLinks>
 									{email && (
-										<Link href={`mailto:${email}`} passHref>
+										<Link href={`mailto:${email}`} passHref scroll={false}>
 											<MenuLink className="type-h3">
 												{email}
 											</MenuLink>
 										</Link>
 									)}
 									{phone && (
-										<Link href={`tel:${phone}`} passHref>
+										<Link href={`tel:${phone}`} passHref scroll={false}>
 											<MenuLink className="type-h3">
 												{phone}
 											</MenuLink>

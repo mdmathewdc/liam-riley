@@ -104,7 +104,7 @@ const ProjectCardGallery = (props: Props) => {
 			onMouseOut={() => setIsHovered(false)}			
 		>
 			{hasSlides && (
-				<Link href={`/projects/${slug}`} passHref>
+				<Link href={`/projects/${slug}`} passHref scroll={false}>
 					<Embla
 						className="embla"
 						ref={emblaRef}

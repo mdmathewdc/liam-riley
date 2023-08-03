@@ -57,7 +57,7 @@ const FooterColourGrid = (props: Props) => {
 	return (
 		<>
 			{hasColors && (
-				<Link href="/photography" passHref>
+				<Link href="/photography" passHref scroll={false}>
 					<FooterColourGridWrapper
 						ref={ref}
 						className="footer-colour-grid"
