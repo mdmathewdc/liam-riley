@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import client from '../../client';
-import { ProjectsType, SiteSettingsType } from '../../shared/types/types';
+import { ProjectsType, SiteSettingsType, Transitions } from '../../shared/types/types';
 import ProjectsTitle from '../../components/blocks/ProjectsTitle';
 import { NextSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 import MainFilterBar from '../../components/blocks/MainFilterBar';
 import ProjectsList from '../../components/blocks/ProjectsList';
+import { motion } from 'framer-motion';
 
-const PageWrapper = styled.div``;
+const PageWrapper = styled(motion.div)``;
 
 type Props = {
 	siteSettings: SiteSettingsType;
@@ -19,6 +20,7 @@ type Props = {
 	initialLastProjectId: string;
 	allProjectsCount: number;
 	cursorRefresh: () => void;
+	pageTransitionVariants: Transitions;
 };
 
 const Page = (props: Props) => {
@@ -29,7 +31,8 @@ const Page = (props: Props) => {
 		categories,
 		initialLastProjectId,
 		allProjectsCount,
-		cursorRefresh
+		cursorRefresh,
+		pageTransitionVariants
 	} = props;
 
 	const [windowHeight, setWindowHeight] = useState(0);
@@ -145,7 +148,12 @@ const Page = (props: Props) => {
 	}, []);
 
 	return (
-		<PageWrapper>
+		<PageWrapper
+			variants={pageTransitionVariants}
+			initial="hidden"
+			animate="visible"
+			exit="hidden"
+		>
 			<NextSeo
 				title="Liam Riley | Projects"
 				description={siteSettings?.seoDescription || ''}

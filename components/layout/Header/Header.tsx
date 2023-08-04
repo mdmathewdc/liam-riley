@@ -96,6 +96,7 @@ const Header = (props: Props) => {
 	} = siteData;
 
 	const [isActive, setIsActive] = useState(false);
+	const [isPhotographyPage, setIsPhotographyPage] = useState(false);
 
 	const prevScrollPosRef = useRef(0);
 
@@ -120,7 +121,18 @@ const Header = (props: Props) => {
 	};
 
 	useEffect(() => {
-		if (viewportWidth === 'tabletPortrait' || viewportWidth === 'mobile') {
+		if (router.pathname === '/photography') {
+			setIsActive(true);
+			setIsPhotographyPage(true);
+			return;
+		} else {
+			setIsPhotographyPage(false);
+		}
+
+		if (
+			viewportWidth === 'tabletPortrait' ||
+			viewportWidth === 'mobile'
+		) {
 			setIsActive(true);
 			return;
 		}
@@ -150,62 +162,76 @@ const Header = (props: Props) => {
 						<Logo className="type-label">Liam Riley</Logo>
 					</Link>
 					<MenuLinksWrapper>
-						<MenuLinks>
-							<Link href="/" passHref scroll={false}>
-								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
-									Home
-									<AnimatedLineWrapper strokeWidth={2} />
-								</MenuLink>
-							</Link>
-							<Link href="/projects" passHref scroll={false}>
-								<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
-									Projects
-									<AnimatedLineWrapper strokeWidth={2} />
-								</MenuLink>
-							</Link>
-						</MenuLinks>
-						<MenuLinks>
-							{instagramUrl && (
-								<Link href={instagramUrl} passHref scroll={false}>
-									<MenuLink
-										className="type-label animated-line-parent animated-line-parent--tiny"
-										target="_blank"
-									>
-										Instagram
-										<AnimatedLineWrapper strokeWidth={2} />
-									</MenuLink>
-								</Link>
-							)}
-							{vimeoUrl && (
-								<Link href={vimeoUrl} passHref scroll={false}>
-									<MenuLink
-										className="type-label animated-line-parent animated-line-parent--tiny"
-										target="_blank"
-									>
-										Vimeo
-										<AnimatedLineWrapper strokeWidth={2} />
-									</MenuLink>
-								</Link>
-							)}
-						</MenuLinks>
-						<MenuLinks>
-							{email && (
-								<Link href={`mailto:${email}`} passHref scroll={false}>
+						{!isPhotographyPage && (
+							<>
+								<MenuLinks>
+									<Link href="/" passHref scroll={false}>
+										<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+											Home
+											<AnimatedLineWrapper strokeWidth={2} />
+										</MenuLink>
+									</Link>
+									<Link href="/projects" passHref scroll={false}>
+										<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+											Projects
+											<AnimatedLineWrapper strokeWidth={2} />
+										</MenuLink>
+									</Link>
+								</MenuLinks>
+								<MenuLinks>
+									{instagramUrl && (
+										<Link href={instagramUrl} passHref scroll={false}>
+											<MenuLink
+												className="type-label animated-line-parent animated-line-parent--tiny"
+												target="_blank"
+											>
+												Instagram
+												<AnimatedLineWrapper strokeWidth={2} />
+											</MenuLink>
+										</Link>
+									)}
+									{vimeoUrl && (
+										<Link href={vimeoUrl} passHref scroll={false}>
+											<MenuLink
+												className="type-label animated-line-parent animated-line-parent--tiny"
+												target="_blank"
+											>
+												Vimeo
+												<AnimatedLineWrapper strokeWidth={2} />
+											</MenuLink>
+										</Link>
+									)}
+								</MenuLinks>
+								<MenuLinks>
+									{email && (
+										<Link href={`mailto:${email}`} passHref scroll={false}>
+											<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+												{email}
+												<AnimatedLineWrapper strokeWidth={2} />
+											</MenuLink>
+										</Link>
+									)}
+									{phone && (
+										<Link href={`tel:${phone}`} passHref scroll={false}>
+											<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
+												{phone}
+												<AnimatedLineWrapper strokeWidth={2} />
+											</MenuLink>
+										</Link>
+									)}
+								</MenuLinks>
+							</>
+						)}
+						{isPhotographyPage && (
+							<MenuLinks>
+								<Link href="/" passHref scroll={false}>
 									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
-										{email}
+										Get me out of here
 										<AnimatedLineWrapper strokeWidth={2} />
 									</MenuLink>
 								</Link>
-							)}
-							{phone && (
-								<Link href={`tel:${phone}`} passHref scroll={false}>
-									<MenuLink className="type-label animated-line-parent animated-line-parent--tiny">
-										{phone}
-										<AnimatedLineWrapper strokeWidth={2} />
-									</MenuLink>
-								</Link>
-							)}
-						</MenuLinks>
+							</MenuLinks>
+						)}
 					</MenuLinksWrapper>
 					<MenuColourGrid colors={easterEggColors} />
 					<MenuTrigger

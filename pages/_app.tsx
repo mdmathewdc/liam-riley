@@ -92,9 +92,6 @@ const App = (props: Props) => {
 		}
 	}, [router.pathname]);
 
-	console.log('appCursorRefresh', appCursorRefresh);
-	
-
 	return (
 		<>
 			<GlobalStyles />

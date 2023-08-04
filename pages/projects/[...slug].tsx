@@ -1,25 +1,33 @@
 import styled from 'styled-components';
 import client from '../../client';
-import { ProjectsType, SiteSettingsType } from '../../shared/types/types';
+import { ProjectsType, SiteSettingsType, Transitions } from '../../shared/types/types';
 import { NextSeo } from 'next-seo';
 import ProjectPlayer from '../../components/blocks/ProjectPlayer';
 import ProjectContent from '../../components/blocks/ProjectContent';
+import { motion } from 'framer-motion';
 
 type Props = {
 	data: ProjectsType;
 	siteSettings: SiteSettingsType;
+	pageTransitionVariants: Transitions;
 };
 
-const PageWrapper = styled.div``;
+const PageWrapper = styled(motion.div)``;
 
 const Page = (props: Props) => {
 	const {
 		data,
-		siteSettings
+		siteSettings,
+		pageTransitionVariants
 	} = props;
 
 	return (
-		<PageWrapper>
+		<PageWrapper
+			variants={pageTransitionVariants}
+			initial="hidden"
+			animate="visible"
+			exit="hidden"
+		>
 			<NextSeo
 				title={`Liam Riley | ${data?.title}`}
 				description={siteSettings?.seoDescription || ''}
