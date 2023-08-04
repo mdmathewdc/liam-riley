@@ -18,6 +18,7 @@ type Props = {
 	handleLoadMore: () => void;
 	noMoreProjectsToFetch: boolean;
 	isLoading: boolean;
+	cursorRefresh: () => void;
 }
 
 const ProjectsListWrapper = styled.section<StyledProps>`
@@ -71,7 +72,8 @@ const ProjectsList = (props: Props) => {
 		projects,
 		handleLoadMore,
 		noMoreProjectsToFetch,
-		isLoading
+		isLoading,
+		cursorRefresh
 	} = props;
 
 	const [isHovered, setIsHovered] = useState(false);
@@ -95,6 +97,7 @@ const ProjectsList = (props: Props) => {
 					key={i}
 					setIsHovered={setIsHovered}
 					isHovered={isHovered}
+					cursorRefresh={cursorRefresh}
 				/>
 			))}
 			<AnimatePresence>

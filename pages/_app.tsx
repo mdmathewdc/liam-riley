@@ -10,6 +10,7 @@ import { GlobalStyles } from '../styles/global';
 import use1vh from '../hooks/use1vh';
 import { Transitions } from '../shared/types/types';
 import useHeaderHeight from '../hooks/useHeaderHeight';
+import ProjectGalleryCursor from '../components/elements/ProjectGalleryCursor';
 
 const pageTransitionVariants: Transitions = {
 	hidden: { opacity: 0, transition: { duration: 0.3 } },
@@ -29,6 +30,7 @@ const App = (props: Props) => {
 
 	const [hasVisited, setHasVisited] = useState<boolean>(false);
 	const [lightColour, setLightColour] = useState("#FFF");
+	const [appCursorRefresh, setAppCursorRefresh] = useState(0);
 
 	const router= useRouter();
 	const routerEvents = router.events;
@@ -80,6 +82,19 @@ const App = (props: Props) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setAppCursorRefresh(appCursorRefresh + 1);
+		}, 300);
+
+		return () => {
+			clearTimeout(timer);
+		}
+	}, [router.pathname]);
+
+	console.log('appCursorRefresh', appCursorRefresh);
+	
+
 	return (
 		<>
 			<GlobalStyles />
@@ -95,8 +110,14 @@ const App = (props: Props) => {
 							pageTransitionVariants={pageTransitionVariants}
 							hasVisited={hasVisited}
 							lightColour={lightColour}
+							cursorRefresh={
+								() => setAppCursorRefresh(appCursorRefresh + 1)
+							}
 						/>
 					</AnimatePresence>
+					<ProjectGalleryCursor
+						cursorRefresh={() => setAppCursorRefresh(appCursorRefresh + 1)}
+					/>
 				</Layout>
 			</ThemeProvider>
 		</>

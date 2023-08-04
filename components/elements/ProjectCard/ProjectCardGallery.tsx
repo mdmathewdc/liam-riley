@@ -96,7 +96,7 @@ const ProjectCardGallery = (props: Props) => {
 
 	return (
 		<ProjectCardGalleryWrapper
-			className={`view-element-left-right ${
+			className={`gallery-wrapper view-element-left-right ${
 				inView ? 'view-element-left-right--in-view' : ''
 			}`}
 			ref={ref}

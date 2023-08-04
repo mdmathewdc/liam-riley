@@ -56,6 +56,12 @@ export const GlobalStyles = createGlobalStyle`
 				overflow-y: hidden;
 			}
 		}
+
+		&.remove-cursor {
+			* {
+				cursor: none !important;
+			}
+		}
 	}
 
 	body {
@@ -198,13 +204,6 @@ export const GlobalStyles = createGlobalStyle`
 		position: relative;
 		text-decoration: none;
 
-		&:hover {
-			path {
-				stroke-dasharray: 1000;
-				stroke-dashoffset: 0;
-			}
-		}
-
 		&--small {
 			.line-wrapper {
 				bottom: -7px !important;
@@ -214,12 +213,6 @@ export const GlobalStyles = createGlobalStyle`
 		&--tiny {
 			.line-wrapper {
 				bottom: -4px !important;
-			}
-		}
-
-		&--slow {
-			path {
-				transition: all var(--transition-speed-extra-slow) var(--transition-ease);
 			}
 		}
 	}

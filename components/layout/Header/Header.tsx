@@ -120,20 +120,15 @@ const Header = (props: Props) => {
 	};
 
 	useEffect(() => {
-		const currentScrollPos = window.pageYOffset;
-		if (router.pathname !== '/' && currentScrollPos === 0) {
-			setIsActive(true);
-		}
-
-		if (router.pathname === '/' && currentScrollPos === 0) {
-			setIsActive(false);
-		}
-	}, [router.pathname]);
-
-	useEffect(() => {
 		if (viewportWidth === 'tabletPortrait' || viewportWidth === 'mobile') {
 			setIsActive(true);
 			return;
+		}
+
+		const currentScrollPos = window.pageYOffset;
+
+		if (router.pathname === '/' && currentScrollPos === 0) {
+			setIsActive(false);
 		}
 
 		const throttledHandleScroll = throttle(handleScroll, 50);
@@ -146,7 +141,7 @@ const Header = (props: Props) => {
 
 	return (
 		<HeaderWrapper
-			className="header performance"
+			className="header"
 			$isActive={isActive}
 		>
 			<LayoutWrapper>

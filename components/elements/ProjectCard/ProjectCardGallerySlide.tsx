@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import MuxPlayer from "@mux/mux-player-react"; 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 type Props = {
 	data: string;

@@ -15,8 +15,6 @@ type Props = {
 }
 
 const FeaturedProjectsWrapper = styled.section<StyledProps>`
-	position: relative;
-	z-index: -1;
 	margin-bottom: ${pxToRem(360)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {

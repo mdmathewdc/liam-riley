@@ -18,6 +18,7 @@ type Props = {
 	};
 	initialLastProjectId: string;
 	allProjectsCount: number;
+	cursorRefresh: () => void;
 };
 
 const Page = (props: Props) => {
@@ -27,7 +28,8 @@ const Page = (props: Props) => {
 		lightColour,
 		categories,
 		initialLastProjectId,
-		allProjectsCount
+		allProjectsCount,
+		cursorRefresh
 	} = props;
 
 	const [windowHeight, setWindowHeight] = useState(0);
@@ -74,6 +76,7 @@ const Page = (props: Props) => {
 		setlastProjectId(newLastId);
 		setNoMoreProjectsToFetch(results.length <= 4);
 		setIsLoading(false);
+		cursorRefresh();
 	};
 
 	const handleFilter = async () => {
@@ -106,11 +109,20 @@ const Page = (props: Props) => {
 		setlastProjectId(newLastId);
 		setNoMoreProjectsToFetch(results.length <= 4);
 		setIsLoading(false);
+		cursorRefresh();
 	};
 
 	useEffect(() => {
 		if (isFirstRender) return;
 		handleFilter();
+
+		const timer = setTimeout(() => {
+			cursorRefresh();
+		}, 500);
+
+		return () => {
+			clearTimeout(timer);
+		}
 	}, [activeFilters]);
 
 	useEffect(() => {
@@ -155,6 +167,7 @@ const Page = (props: Props) => {
 				handleLoadMore={() => handleLoadMore()}
 				noMoreProjectsToFetch={noMoreProjectsToFetch}
 				isLoading={isLoading}
+				cursorRefresh={cursorRefresh}
 			/>
 		</PageWrapper>
 	);

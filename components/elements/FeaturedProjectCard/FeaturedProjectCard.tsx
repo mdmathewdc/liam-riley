@@ -39,6 +39,7 @@ const FeaturedProjectCardWrapper = styled(motion.div)`
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		margin-bottom: ${pxToRem(32)};
+		transform: initial !important;
 	}
 `;
 

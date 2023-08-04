@@ -8,7 +8,7 @@ import ProjectCardGallery from './ProjectCardGallery';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import MuxPlayer from "@mux/mux-player-react/lazy"; 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AnimatedLineWrapper from '../AnimatedLineWrapper';
 import Link from 'next/link';
 
@@ -26,6 +26,7 @@ type Props = {
 	year: number;
 	setIsHovered: (isHovered: boolean) => void;
 	isHovered: boolean;
+	cursorRefresh: () => void;
 }
 
 const ProjectCardWrapper = styled.div<StyledProps>`
@@ -136,7 +137,8 @@ const ProjectCard = (props: Props) => {
 		slug,
 		title,
 		setIsHovered,
-		isHovered
+		isHovered,
+		cursorRefresh
 	} = props;
 
 	const [creditsIsActive, setCreditsIsActive] = useState(false);
@@ -150,6 +152,10 @@ const ProjectCard = (props: Props) => {
 		threshold: 0.2,
 		rootMargin: '-50px'
 	});
+
+	useEffect(() => {
+		cursorRefresh();
+	}, []);
 
 	return (
 		<ProjectCardWrapper
@@ -225,6 +231,7 @@ const ProjectCard = (props: Props) => {
 				creditsIsActive={creditsIsActive}
 				slug={slug}
 				setIsHovered={setIsHovered}
+				isHovered={isHovered}
 			/>
 		</ProjectCardWrapper>
 	);
