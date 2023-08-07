@@ -26,12 +26,12 @@ const ProjectsListWrapper = styled.section<StyledProps>`
 	z-index: 2;
 	margin-bottom: ${pxToRem(240)};
 	pointer-events: ${(props) => props.$isLoading ? 'none' : 'auto'};
-	opacity: ${(props) => props.$isLoading ? 0.5 : 1};
+	opacity: ${(props) => props.$isLoading ? 0.8 : 1};
 
 	transition: opacity var(--transition-speed-default) var(--transition-ease);
 
 	.project-card-wrapper {
-		opacity: ${(props) => props.$isHovered ? 0.5 : 1};
+		opacity: ${(props) => props.$isHovered ? 0.8 : 1};
 	}
 `;
 

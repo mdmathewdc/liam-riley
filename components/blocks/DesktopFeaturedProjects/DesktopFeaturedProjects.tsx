@@ -5,6 +5,8 @@ import LayoutGrid from '../../common/LayoutGrid';
 import FeaturedProjectCard from '../../elements/FeaturedProjectCard';
 import pxToRem from '../../../utils/pxToRem';
 import { useEffect, useState } from 'react';
+import AnimatedLineWrapper from '../../elements/AnimatedLineWrapper';
+import Link from 'next/link';
 
 type StyledProps = {
 	$isActive: boolean | string;
@@ -44,7 +46,22 @@ const Title = styled.h1`
 const FeaturedProjectsList = styled.div`
 	position: relative;
 	z-index: 3;
+	margin-bottom: ${pxToRem(120)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		margin-bottom: ${pxToRem(80)};
+	}
 `;
+
+const SeeAllProjectsWrapper = styled.div`
+	grid-column: 3 / -1;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		grid-column: 1 / -1;
+	}
+`;
+
+const SeeAllProjectsLink = styled.a``;
 
 const DesktopFeaturedProjects = ({ data }: Props) => {
 	const [allTitleWidths, setAllTitleWidths] = useState<number[]>([]);
@@ -114,6 +131,18 @@ const DesktopFeaturedProjects = ({ data }: Props) => {
 						))}
 					</FeaturedProjectsList>
 				)}
+				<LayoutGrid>
+					<SeeAllProjectsWrapper>
+						<Link href="/projects" passHref>
+							<SeeAllProjectsLink
+								className="type-h3 animated-line-parent"
+							>
+								See all projects
+								<AnimatedLineWrapper />
+							</SeeAllProjectsLink>
+						</Link>
+					</SeeAllProjectsWrapper>
+				</LayoutGrid>
 			</LayoutWrapper>
 		</FeaturedProjectsWrapper>
 	);

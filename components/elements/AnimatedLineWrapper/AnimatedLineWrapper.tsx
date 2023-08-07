@@ -19,21 +19,13 @@ const LineWrapper = styled.div`
 	bottom: -10px;
 	left: 0;
 	width: 100%;
+	pointer-events: none;
 
 	svg {
 		width: 100%;
 		height: auto;
 		min-height: 3px;
 	}
-
-	/* path {
-		stroke-dasharray: 1000;
-		stroke-dashoffset: 1000;
-		width: 100%;
-		stroke: var(--colour-dark);
-
-		transition: all var(--transition-speed-slow) var(--transition-ease);
-	} */
 `;
 
 const wrapperVariants = {

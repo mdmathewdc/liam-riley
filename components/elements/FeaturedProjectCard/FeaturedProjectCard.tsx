@@ -219,7 +219,7 @@ const FeaturedProjectCard = (props: Props) => {
 	const wrapperRotate = useTransform(
 		scrollY,
 		[distanceToTop - windowHeight, distanceToTop + distanceToTop / 4],
-		['rotateY(25deg)', 'rotateY(-25deg)']
+		['rotateY(15deg)', 'rotateY(-15deg)']
 	);
 
 	const wrapperOpacity = useTransform(
@@ -233,7 +233,7 @@ const FeaturedProjectCard = (props: Props) => {
 	const snippetCursorRotate = useTransform(
 		motionMouseXPosition,
 		[windowWidth / 4, windowWidth],
-		['rotate(0deg) translateX(0)', 'rotate(10deg) translateX(0)']
+		['rotate(0deg) translateX(0)', 'rotate(3deg) translateX(0)']
 	);
 
 	const wrapperVariants = {
