@@ -62,7 +62,6 @@ export type SiteSettingsType = {
 	homePageParagraphTwo: string;
 	homePageParagraphOne: string;
 	easterEggColors: ColorType[];
-	contactTitle: string;
 	email: string;
 	instagramUrl: string;
 	easterEggText: string;

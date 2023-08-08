@@ -4,6 +4,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import pxToRem from '../../../utils/pxToRem';
 import { useEffect, useRef, useState } from 'react';
+import LayoutWrapper from '../../common/LayoutWrapper';
+import LayoutGrid from '../../common/LayoutGrid';
+
+type StyledProps = {
+	$randStartPosition: number;
+	$randMarginBottom: number;
+	$randPaddingTop: number;
+}
 
 type Props = {
 	images: ImageType[];
@@ -36,8 +44,78 @@ const PhotographyAllImagesWrapper = styled(motion.section)`
 	}
 `;
 
-const ImgWrapper = styled.div`
+const ImgWrapper = styled.div<StyledProps>`
 	width: 100%;
+
+	&:nth-child(6n + 1) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 3`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 2) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 4`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 3) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 3`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 4) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 5`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 5) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 3`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 6) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 4`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
+
+	&:nth-child(6n + 7) {
+		grid-column: ${(props) => `${props.$randStartPosition} / span 3`};
+		margin-bottom: ${(props) => `${props.$randMarginBottom}px`};
+		padding-top: ${(props) => `${props.$randPaddingTop}px`};
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			grid-column: 1 / -1;
+		}
+	}
 `;
 
 const Img = styled.img`
@@ -74,7 +152,8 @@ const PhotographyAllImages = (props: Props) => {
 	if (!hasImages) <></>;
 
 	const outerContainerRef = useRef<HTMLDivElement>(null);
-	const random10Images = images.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+	const randomImages = images.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * (6 - 2 + 1)) + 2);
 
 	useEffect(() => {
 		const outerContainer = outerContainerRef.current;
@@ -85,9 +164,6 @@ const PhotographyAllImages = (props: Props) => {
 
 		const handleScroll = () => {
 			const isBottom = (innerContainer.scrollHeight - innerContainer.scrollTop) - 10 <= innerContainer.clientHeight;
-
-			console.log('isBottom', isBottom);
-			
 
 			setSeeAllImages(!isBottom);
 		};
@@ -109,17 +185,21 @@ const PhotographyAllImages = (props: Props) => {
 					exit='hidden'
 					ref={outerContainerRef}
 				>
-					<ResponsiveMasonry
-						columnsCountBreakPoints={{350: 1, 750: 2}}
-					>
-						<Masonry gutter="16px">
-							{random10Images.map((item, i) => (
-								<ImgWrapper key={i}>
+					<LayoutWrapper>
+						<LayoutGrid>
+							{randomImages.map((item, i) => (
+								<ImgWrapper
+									className="photo-wrapper"
+									key={i}
+									$randStartPosition={Math.floor(Math.random() * (5 - 1 + 1)) + 1}
+									$randMarginBottom={Math.floor(Math.random() * (360 - 10 + 1)) + 10}
+									$randPaddingTop={Math.floor(Math.random() * (120 - 10 + 1)) + 10}
+								>
 									<Img src={item?.asset?.url} />
 								</ImgWrapper>
 							))}
-						</Masonry>
-					</ResponsiveMasonry>
+						</LayoutGrid>
+					</LayoutWrapper>
 				</PhotographyAllImagesWrapper>
 			)}
 		</AnimatePresence>

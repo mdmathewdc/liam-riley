@@ -40,7 +40,7 @@ const PhotographyTextWrapper = styled(motion.section)<StyledProps>`
 	pointer-events: ${(props) => props.$cannotHover ? 'none' : 'auto'};
 
 	.word {
-		mix-blend-mode: ${(props) => props.$cannotHover ? 'soft-light' : 'difference'};
+		visibility: ${(props) => props.$cannotHover ? 'hidden' : 'visible'};
 	}
 `;
 
