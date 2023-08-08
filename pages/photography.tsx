@@ -6,6 +6,8 @@ import PhotographyText from '../components/blocks/PhotographyText';
 import { NextSeo } from 'next-seo';
 import { Transitions } from '../shared/types/types';
 import { motion } from 'framer-motion';
+import PhotographyImages from '../components/blocks/PhotographyImages';
+import PhotographyAllImages from '../components/blocks/PhotographyAllImages';
 
 type Props = {
 	data: any;
@@ -30,6 +32,7 @@ const Photography = (props: Props) => {
 	const [amountOfBlocks, setAmountOfBlocks] = useState(0);
 	const [blockWidth, setBlockWidth] = useState(0);
 	const [blockHeight, setBlockHeight] = useState(0);
+	const [seeAllImages, setSeeAllImages] = useState(false);
 
 	const handleAllColorsChange = (hex: string) => {
 		setAllBlockColors(hex);
@@ -87,9 +90,18 @@ const Photography = (props: Props) => {
 				title="Liam Riley | Photography"
 				description={data?.seoDescription || ''}
 			/>
+			<PhotographyAllImages
+				images={data?.easterEggImages}
+				isActive={seeAllImages}
+				setSeeAllImages={setSeeAllImages}
+			/>
 			<PhotographyText
 				isActive={allBlockColors}
+				cannotHover={seeAllImages}
 				text={data?.easterEggText}
+				images={data?.easterEggImages}
+				backgroundColour={allBlockColors}
+				setSeeAllImages={setSeeAllImages}
 			/>
 			{[...Array(amountOfBlocks)].map((_, i) => (
 				<PhotographyColorBlock
@@ -110,7 +122,9 @@ export async function getStaticProps() {
 		*[_type == 'siteSettings'][0] {
 			easterEggText,
 			easterEggColors,
-			easterEggImages,
+			easterEggImages[] {
+				asset->
+			},
 			seoDescription
 		}
 	`;

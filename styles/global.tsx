@@ -79,6 +79,21 @@ export const GlobalStyles = createGlobalStyle`
 		line-height: 1.4;
 	}
 
+	/* .custom-img {
+		object-fit: contain;
+		width: 100% !important;
+		position: relative !important;
+		height: unset !important;
+	}
+
+	.unset-img {
+		width: 100%;
+	}
+
+	.unset-img > div {
+		position: unset !important;
+	} */
+
 	strong,
 	b {
 		font-weight: 900;

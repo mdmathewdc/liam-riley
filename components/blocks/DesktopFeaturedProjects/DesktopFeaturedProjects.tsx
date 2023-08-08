@@ -133,7 +133,7 @@ const DesktopFeaturedProjects = ({ data }: Props) => {
 				)}
 				<LayoutGrid>
 					<SeeAllProjectsWrapper>
-						<Link href="/projects" passHref>
+						<Link href="/projects" passHref scroll={false}>
 							<SeeAllProjectsLink
 								className="type-h3 animated-line-parent"
 							>

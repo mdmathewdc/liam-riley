@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { ColorType } from '../../../shared/types/types';
 import Link from 'next/link';
 import MenuColorBlock from './MenuColorBlock';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 type Props = {
 	colors: [
@@ -32,6 +33,7 @@ const MenuColourGrid = (props: Props) => {
 	
 	const hasColors = colors.length > 0;
 	const firstNineColors = colors.slice(0, 9);
+	const router = useRouter();
 
 	const [nineColors, setNineColors] = useState(firstNineColors);
 
@@ -46,6 +48,16 @@ const MenuColourGrid = (props: Props) => {
 		setNineColors(newNineColors);
 	};
 
+	const handleClick = () => {
+		if (router.pathname === '/photography') {
+			router.reload();
+		}
+		else {
+			router.push('/photography');
+		}
+	};
+
+
 	return (
 		<>
 			{hasColors && (
@@ -53,6 +65,7 @@ const MenuColourGrid = (props: Props) => {
 					<MenuColourGridWrapper
 						className="menu-colour-grid"
 						onMouseOver={() => handleNewRandomNineColors()}
+						onClick={() => handleClick()}
 					>
 						<Inner>
 							{nineColors.map((item, i) => (

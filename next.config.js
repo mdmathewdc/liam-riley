@@ -17,7 +17,7 @@ const nextConfig = {
 		SITE_URL: process.env.SITE_URL,
 	},
 	images: {
-		domains: ['www.datocms-assets.com'],
+		domains: ['cdn.sanity.io'],
 	},
 };
 
