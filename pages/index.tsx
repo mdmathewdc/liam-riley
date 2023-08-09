@@ -26,6 +26,9 @@ const Page = (props: Props) => {
 		pageTransitionVariants
 	} = props;
 
+	console.log('featuredProjects', featuredProjects);
+	
+
 	return (
 	<PageWrapper
 		variants={pageTransitionVariants}
@@ -65,9 +68,10 @@ export async function getStaticProps() {
 			showreelVid{asset->}
 		}
 	`;
+
 	const featuredProjectsQuery = `
-		*[_type == 'siteSettings'][0] {
-			"featuredProjects": *[_type == "projects"] {
+		*[_type == "siteSettings"][0] {
+			featuredProjectsNew[]->{
 				_id,
 				title,
 				slug,
@@ -80,7 +84,8 @@ export async function getStaticProps() {
 				}
 			}
 		}
-  	`;
+	`;
+
 
 	const data = await client.fetch(siteSettingsQuery);
 	const featuredProjects = await client.fetch(featuredProjectsQuery);
@@ -88,7 +93,7 @@ export async function getStaticProps() {
 	return {
 		props: {
 			data,
-			featuredProjects: featuredProjects.featuredProjects
+			featuredProjects: featuredProjects.featuredProjectsNew
 		},
 	};
 }
