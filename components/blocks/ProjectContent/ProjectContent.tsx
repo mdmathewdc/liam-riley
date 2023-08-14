@@ -94,18 +94,22 @@ const ProjectContent = (props: Props) => {
 		}
 	};
 
+	const format = (str: string) => {
+		return str.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+	};
+
 	return (
 		<ProjectContentWrapper ref={ref}>
 			<LayoutWrapper>
 				<LayoutGrid>
 					<ProjectContentInner>
-						{title && (
+						{client && (
 							<Title
 								className={`type-h3 view-element-bottom-top ${
 									inView ? 'view-element-bottom-top--in-view' : ''
 								}`}
 							>
-								{title}
+								{client}
 							</Title>
 						)}
 						<SecondaryContentWrapper
@@ -114,10 +118,10 @@ const ProjectContent = (props: Props) => {
 							animate='visible'
 							exit='hidden'
 						>
-							{client && (
+							{title && (
 								<ProjectCardContent
-									title="Client"
-									value={client}
+									title="Title"
+									value={title}
 								/>
 							)}
 							{year && (
@@ -129,7 +133,7 @@ const ProjectContent = (props: Props) => {
 							{category && (
 								<ProjectCardContent
 									title="Type"
-									value={category}
+									value={format(category)}
 								/>
 							)}
 						</SecondaryContentWrapper>

@@ -10,6 +10,9 @@ const AcknowledgementWrapper = styled(motion.div)`
 	top: 0;
 	left: 0;
 	z-index: 5000;
+	width: 100%;
+	height: 100vh;
+	height: 100dvh;
 `;
 
 const Background = styled.div`
@@ -100,7 +103,7 @@ const Acknowledgement = (props: Props) => {
 	return (
 		<>
 			<AnimatePresence>
-				{isActive && (
+				{(isActive && !hasVisited) && (
 					<AcknowledgementWrapper
 						variants={wrapperVariants}
 						initial='hidden'

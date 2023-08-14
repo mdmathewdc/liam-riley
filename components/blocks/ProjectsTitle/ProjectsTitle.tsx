@@ -12,23 +12,15 @@ type Props = {
 	lightColour: string;
 };
 
-const ProjectsTitleWrapper = styled.section`
-	.drawing-canvas {
-		position: absolute;
-		height: 200vh;
-		z-index: 1;
-	}
-`;
+const ProjectsTitleWrapper = styled.section``;
 
 const ProjectsTitleInner = styled.div`
-	height: 100vh;
-	height: 100dvh;
+	padding-top: calc(var(--header-h) + 64px);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	position: relative;
 	z-index: 2;
-	padding-bottom: ${pxToRem(24)};
 `;
 
 const Title = styled.h1`
@@ -95,11 +87,6 @@ const ProjectsTitle = (props: Props) => {
 					</LayoutGrid>
 				</ProjectsTitleInner>
 			</LayoutWrapper>
-			<DrawingCanvas
-				windowHeight={windowHeight}
-				lightColour={lightColour}
-				isProjectsPage={true}
-			/>
 		</ProjectsTitleWrapper>
 	);
 };

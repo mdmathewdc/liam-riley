@@ -159,10 +159,6 @@ const IntroAnimation = (props: Props) => {
 			className="performant"
 		>
 			<StickyWrapper>
-				<DrawingCanvas
-					windowHeight={windowHeight}
-					lightColour={lightColour}
-				/>
 				<VideoWrapper
 					style={{ height, width }}
 				>

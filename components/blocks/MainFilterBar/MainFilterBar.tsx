@@ -22,7 +22,7 @@ const MainFilterBarWrapper = styled.div`
 	z-index: 2;
 
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-		padding: ${pxToRem(64)} 0 ${pxToRem(32)};
+		padding: ${pxToRem(32)} 0 ${pxToRem(32)};
 	}
 `;
 

@@ -26,9 +26,6 @@ const Page = (props: Props) => {
 		pageTransitionVariants
 	} = props;
 
-	console.log('featuredProjects', featuredProjects);
-	
-
 	return (
 	<PageWrapper
 		variants={pageTransitionVariants}

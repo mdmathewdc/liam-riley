@@ -129,8 +129,8 @@ const FeaturedProjectSnippet = styled(motion.div)`
 	justify-content: center;
 	top: 0;
 	left: 0;
-	width: 300px;
-	height: 169px;
+	width: 450px;
+	height: 253px;
 	z-index: 10;
 	pointer-events: none;
 
@@ -141,8 +141,8 @@ const FeaturedProjectSnippet = styled(motion.div)`
 	mux-player {
 		position: absolute;
 		inset: 0;
-		width: 300px;
-		height: 169px;
+		width: 450px;
+		height: 253px;
 		background: transparent !important;
 		background-color: transparent !important;
 
@@ -161,9 +161,15 @@ const FeaturedProjectSnippet = styled(motion.div)`
 
 const FeaturedProjectSnippetInner = styled(motion.div)`
 	position: relative;
-	width: 300px;
-	height: 169px;
+	width: 450px;
+	height: 253px;
 	pointer-events: none;
+
+	img {
+		object-fit: cover;
+		height: 100%;
+		width: 100%;
+	}
 `;
 
 const MobileSnippetWrapper = styled.a`
@@ -219,7 +225,7 @@ const FeaturedProjectCard = (props: Props) => {
 	const wrapperRotate = useTransform(
 		scrollY,
 		[distanceToTop - windowHeight, distanceToTop + distanceToTop / 4],
-		['rotateY(15deg)', 'rotateY(-15deg)']
+		['rotateY(35deg)', 'rotateY(-35deg)']
 	);
 
 	const wrapperOpacity = useTransform(
@@ -233,7 +239,7 @@ const FeaturedProjectCard = (props: Props) => {
 	const snippetCursorRotate = useTransform(
 		motionMouseXPosition,
 		[windowWidth / 4, windowWidth],
-		['rotate(0deg) translateX(0)', 'rotate(3deg) translateX(0)']
+		['rotate(-1deg) translateX(0)', 'rotate(5deg) translateX(0)']
 	);
 
 	const wrapperVariants = {
@@ -241,20 +247,20 @@ const FeaturedProjectCard = (props: Props) => {
 			x: mouseXPosition,
 			transition: {
 				type: 'spring',
-				mass: 0.05,
-				stiffness: 1000,
-				damping: 40,
-				ease: 'linear'
+				mass: 0.2,
+				stiffness: 100,
+				damping: 10,
+				ease: 'easeInOut'
 			}
 		},
 		visible: {
 			x: mouseXPosition,
 			transition: {
 				type: 'spring',
-				mass: 0.05,
-				stiffness: 1000,
-				damping: 40,
-				ease: 'linear'
+				mass: 0.2,
+				stiffness: 100,
+				damping: 10,
+				ease: 'easeInOut'
 			}
 		}
 	};
@@ -315,22 +321,22 @@ const FeaturedProjectCard = (props: Props) => {
 							onMouseOut={() => setSnippetVideo(false)}
 							className="featured-project-card__title-wrapper"
 						>
-							{data?.title && (
+							{data?.client && (
 								<Title
 									className="type-h1"
 									$fontSize={fontSize}
 									$lineHeight={lineHeight}
 									$isActive={snippetVideo}
 								>
-									{data.title}
+									{data.client}
 								</Title>
 							)}
-							{data?.client && (
+							{data?.title && (
 								<Client
 									className="type-p"
 									$isActive={snippetVideo ? true : false}
 								>
-									{data.client}
+									{data.title}
 								</Client>
 							)}
 						</TitleWrapper>
@@ -351,15 +357,9 @@ const FeaturedProjectCard = (props: Props) => {
 								transform: snippetCursorRotate
 							}}
 						>
-							<MuxPlayer
-								streamType="on-demand"
-								playbackId={snippetVideo}
-								autoPlay="muted"
-								loop={true}
-								thumbnailTime={0}
-								preload="auto"
-								muted={true}
-								playsInline={true}
+							<img
+								src={`https://image.mux.com/${snippetVideo}/animated.webp`}
+								loading="eager"
 							/>
 						</FeaturedProjectSnippetInner>
 					</FeaturedProjectSnippet>
