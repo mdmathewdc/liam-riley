@@ -102,6 +102,7 @@ const Photography = (props: Props) => {
 				images={data?.easterEggImages}
 				backgroundColour={allBlockColors}
 				setSeeAllImages={setSeeAllImages}
+				
 			/>
 			{[...Array(amountOfBlocks)].map((_, i) => (
 				<PhotographyColorBlock

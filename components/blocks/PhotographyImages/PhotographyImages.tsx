@@ -6,6 +6,7 @@ import pxToRem from '../../../utils/pxToRem';
 type Props = {
 	images: ImageType[];
 	word: string | null;
+	cannotHover: boolean;
 }
 
 const PhotographyImagesWrapper = styled(motion.section)`
@@ -22,6 +23,8 @@ const PhotographyImagesWrapper = styled(motion.section)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	ptab
 `;
 
 const Img = styled.img`
@@ -57,7 +60,8 @@ const wrapperVariants = {
 const PhotographyImages = (props: Props) => {
 	const {
 		images,
-		word
+		word,
+		cannotHover
 	} = props;
 
 	const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -65,7 +69,7 @@ const PhotographyImages = (props: Props) => {
 	return (
 		<>
 			<AnimatePresence>
-				{word && (
+				{(word && !cannotHover) && (
 					<PhotographyImagesWrapper
 						variants={wrapperVariants}
 						initial='hidden'

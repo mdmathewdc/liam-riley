@@ -54,6 +54,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -64,6 +65,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -74,6 +76,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -84,6 +87,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -94,6 +98,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -104,6 +109,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 
@@ -114,6 +120,7 @@ const ImgWrapper = styled.div<StyledProps>`
 
 		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 			grid-column: 1 / -1;
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 `;

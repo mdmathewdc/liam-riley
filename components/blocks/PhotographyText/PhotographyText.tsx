@@ -17,6 +17,7 @@ type WordProps = {
 	canHover: boolean;
 	images: ImageType[];
 	setSeeAllImages: (value: boolean) => void;
+	cannotHover: boolean;
 }
 
 type Props = {
@@ -88,7 +89,8 @@ const PhotographyWord = (props: WordProps) => {
 		word,
 		canHover,
 		images,
-		setSeeAllImages
+		setSeeAllImages,
+		cannotHover
 	} = props;
 
 	const [photosActive, setPhotosActive] = useState<null | string>(null);
@@ -107,6 +109,10 @@ const PhotographyWord = (props: WordProps) => {
 					$canHover={canHover}
 					onMouseOver={() => setPhotosActive(canHover ? word : null)}
 					onMouseOut={() => setPhotosActive(null)}
+					onBlur={() => () => {
+						setPhotosActive(null);
+						setSeeAllImages(false);
+					}}
 					onClick={() => setSeeAllImages(true)}
 					className="word"
 				>
@@ -116,6 +122,7 @@ const PhotographyWord = (props: WordProps) => {
 			<PhotographyImages
 				images={images}
 				word={photosActive}
+				cannotHover={cannotHover}
 			/>
 		</>
 	);
@@ -153,6 +160,7 @@ const PhotographyText = (props: Props) => {
 								word={word}
 								images={images}
 								setSeeAllImages={setSeeAllImages}
+								cannotHover={cannotHover}
 							/>
 						))}
 					</PhotographyTextWrapper>
