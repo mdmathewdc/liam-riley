@@ -38,9 +38,6 @@ const ProjectPlayer = (props: Props) => {
 							<ReactPlayer
 								width="100%"
 								height="100%"
-								playing={true}
-								loop={true}
-								muted={true}
 								url={data}
 								playsInline
 								controls={true}
