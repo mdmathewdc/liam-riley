@@ -14,6 +14,7 @@ type StyledProps = {
 
 type Props = {
 	data: ProjectsType[];
+	isRelatedProjects?: boolean;
 }
 
 const FeaturedProjectsWrapper = styled.section<StyledProps>`
@@ -63,7 +64,7 @@ const SeeAllProjectsWrapper = styled.div`
 
 const SeeAllProjectsLink = styled.a``;
 
-const DesktopFeaturedProjects = ({ data }: Props) => {
+const DesktopFeaturedProjects = ({ data, isRelatedProjects = false }: Props) => {
 	const [allTitleWidths, setAllTitleWidths] = useState<number[]>([]);
 	const [fontSize, setFontSize] = useState("5.375rem");
 	const [lineHeight, setLineHeight] = useState("1");
@@ -111,7 +112,7 @@ const DesktopFeaturedProjects = ({ data }: Props) => {
 			<LayoutWrapper>
 				<LayoutGrid>
 					<Title className="type-p">
-						Featured Projects
+						{isRelatedProjects ? 'More' : 'Featured'} Projects
 					</Title>
 				</LayoutGrid>
 				{hasData && (
@@ -137,7 +138,7 @@ const DesktopFeaturedProjects = ({ data }: Props) => {
 							<SeeAllProjectsLink
 								className="type-h3 animated-line-parent"
 							>
-								See all projects
+								{isRelatedProjects ? 'Back to' : 'See all'} projects
 								<AnimatedLineWrapper />
 							</SeeAllProjectsLink>
 						</Link>

@@ -90,7 +90,7 @@ const Page = (props: Props) => {
 		const categoriesFilter = activeFilters.map((category) => `'${category}'`).join(',');
 
 		const projectsQuery = `
-			*[_type == 'projects' && category in [${categoriesFilter}]] | order(orderRank) [0...5] {
+			*[_type == 'projects' && category in [${categoriesFilter}]] | order(orderRank) [0...6] {
 				...,
 				gallery[] {
 					...,
@@ -189,7 +189,7 @@ export async function getStaticProps() {
 	`;
 
 	const projectsQuery = `
-		*[_type == 'projects'] | order(orderRank) [0...4] {
+		*[_type == 'projects'] | order(orderRank) [0...6] {
 			...,
 			gallery[] {
 				...,
