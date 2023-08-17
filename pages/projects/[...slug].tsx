@@ -6,12 +6,13 @@ import ProjectPlayer from '../../components/blocks/ProjectPlayer';
 import ProjectContent from '../../components/blocks/ProjectContent';
 import { motion } from 'framer-motion';
 import DesktopFeaturedProjects from '../../components/blocks/DesktopFeaturedProjects';
+import { useEffect } from 'react';
 
 type Props = {
 	data: ProjectsType;
 	siteSettings: SiteSettingsType;
 	pageTransitionVariants: Transitions;
-	relatedProjects: ProjectsType[];
+	featuredProjects: ProjectsType[];
 };
 
 const PageWrapper = styled(motion.div)``;
@@ -21,8 +22,15 @@ const Page = (props: Props) => {
 		data,
 		siteSettings,
 		pageTransitionVariants,
-		relatedProjects
+		featuredProjects
 	} = props;
+
+	useEffect(() => {
+		const title = data?.title;
+		const projectsVisited = JSON.parse(localStorage.getItem('projects-visited') || '[]');
+		projectsVisited.push(title);
+		localStorage.setItem('projects-visited', JSON.stringify(projectsVisited));
+	}, []);
 
 	return (
 		<PageWrapper
@@ -46,7 +54,7 @@ const Page = (props: Props) => {
 				credits={data?.credits}
 			/>
 			<DesktopFeaturedProjects
-				data={relatedProjects}
+				data={featuredProjects}
 				isRelatedProjects
 			/>
 		</PageWrapper>
@@ -84,39 +92,32 @@ export async function getStaticProps({ params }: any) {
 		}
 	`;
 
-	const relatedProjectsQuery = `
-		*[_type == "projects"] [0...100] {
-			_id,
-			title,
-			slug,
-			client,
-			gallery[] {
-				...,
-				_type == "snippetVideo" => {
-					asset->
-				},
+	const featuredProjectsQuery = `
+		*[_type == "siteSettings"][0] {
+			featuredProjectsNew[]->{
+				_id,
+				title,
+				slug,
+				client,
+				gallery[] {
+					...,
+					_type == "snippetVideo" => {
+						asset->
+					},
+				}
 			}
 		}
-	`
+	`;
 
 	const data = await client.fetch(projectsQuery);
 	const siteSettings = await client.fetch(siteSettingsQuery);
-	let relatedProjects = await client.fetch(relatedProjectsQuery);
-
-	// Shuffle the projects array randomly
-	let shuffledRelatedProjects = relatedProjects.sort(() => Math.random() - 0.5);
-
-	// remove current project from the array by the _id
-	shuffledRelatedProjects.splice(shuffledRelatedProjects.findIndex((item: any) => item._id === data._id), 1);
-
-	// Select the first 10 shuffled projects
-	relatedProjects = shuffledRelatedProjects.slice(0, 10);
+	let featuredProjects = await client.fetch(featuredProjectsQuery);
 
 	return {
 		props: {
 			data,
 			siteSettings,
-			relatedProjects
+			featuredProjects: featuredProjects.featuredProjectsNew
 		},
 	};
 }

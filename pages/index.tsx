@@ -27,33 +27,33 @@ const Page = (props: Props) => {
 	} = props;
 
 	return (
-	<PageWrapper
-		variants={pageTransitionVariants}
-		initial="hidden"
-		animate="visible"
-		exit="hidden"
-	>
-		<NextSeo
-			title="Liam Riley | Editor"
-			description={data?.seoDescription || ''}
-		/>
-		<Acknowledgement
-			hasVisited={hasVisited}
-			content={data.aoc}
-		/>
-		<HomeProfile
-			paragraphOne={data.homePageParagraphOne}
-			paragraphTwo={data.homePageParagraphTwo}
-			paragraphThree={data.homePageParagraphThree}
-			title={data.homePageTitle}
-			showreelVideo={data.showreelVid}
-			profileVideo={data.profileVid}
-			lightColour={lightColour}
-		/>
-		<DesktopFeaturedProjects
-			data={featuredProjects}
-		/>
-	</PageWrapper>
+		<PageWrapper
+			variants={pageTransitionVariants}
+			initial="hidden"
+			animate="visible"
+			exit="hidden"
+		>
+			<NextSeo
+				title="Liam Riley | Editor"
+				description={data?.seoDescription || ''}
+			/>
+			<Acknowledgement
+				hasVisited={hasVisited}
+				content={data.aoc}
+			/>
+			<HomeProfile
+				paragraphOne={data.homePageParagraphOne}
+				paragraphTwo={data.homePageParagraphTwo}
+				paragraphThree={data.homePageParagraphThree}
+				title={data.homePageTitle}
+				showreelVideo={data.showreelVid}
+				profileVideo={data.profileVid}
+				lightColour={lightColour}
+			/>
+			<DesktopFeaturedProjects
+				data={featuredProjects}
+			/>
+		</PageWrapper>
 	);
 };
 
@@ -82,7 +82,6 @@ export async function getStaticProps() {
 			}
 		}
 	`;
-
 
 	const data = await client.fetch(siteSettingsQuery);
 	const featuredProjects = await client.fetch(featuredProjectsQuery);

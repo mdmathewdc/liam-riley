@@ -12,6 +12,8 @@ type StyledProps = {
 	$fontSize?: string;
 	$lineHeight?: string;
 	$isActive?: string | boolean;
+	$hasVisited?: boolean;
+	$randNum?: number;
 }
 
 type Props = {
@@ -21,6 +23,7 @@ type Props = {
 	fontSize: string;
 	lineHeight: string;
 	setIsHovered: (isHovered: boolean) => void;
+	isRelatedProjects?: boolean;
 }
 
 const FeaturedProjectCardWrapper = styled(motion.div)`
@@ -66,14 +69,19 @@ const Index = styled.p`
 	}
 `;
 
-const TitleWrapper = styled.a`
+const TitleWrapper = styled.a<StyledProps>`
 	grid-column: 3 / -1;
 	display: flex;
 	align-items: flex-end;
 	text-decoration: none;
 	position: relative;
+	opacity: ${(props) => props.$hasVisited ? 0.2 : 1};
 
 	transition: all var(--transition-speed-slow) var(--transition-ease);
+
+	&:hover {
+		opacity: 1;
+	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
@@ -90,6 +98,7 @@ const Title = styled.h3<StyledProps>`
 	font-size: ${props => props.$fontSize} !important;
 	line-height: 0.8 !important;
 	white-space: nowrap;
+	position: relative;
 
 	transition: all var(--transition-speed-slow) var(--transition-ease);
 
@@ -188,13 +197,15 @@ const FeaturedProjectCard = (props: Props) => {
 		handleTitleWidth,
 		fontSize,
 		lineHeight,
-		setIsHovered
+		setIsHovered,
+		isRelatedProjects
 	} = props;
 
 	const [windowHeight, setWindowHeight] = useState(0);
 	const [windowWidth, setWindowWidth] = useState(0);
 	const [distanceToTop, setDistanceToTop] = useState(0);
 	const [snippetVideo, setSnippetVideo] = useState<string | boolean>(false);
+	const [hasVisited, setHasVisited] = useState(false);
 
 	const position = useMousePosition();
 
@@ -218,6 +229,17 @@ const FeaturedProjectCard = (props: Props) => {
 
 		setWindowHeight(window.innerHeight);
 		setWindowWidth(window.innerWidth);
+
+		const projectsVisited = localStorage.getItem('projects-visited');
+		const parsedProjectsVisited = JSON.parse(projectsVisited || '[]');
+
+		if (parsedProjectsVisited.includes(data?.title)) {
+			setHasVisited(true);
+		}
+
+		return () => {
+			setHasVisited(false);
+		}
 	}, []);
 
 	const { scrollY } = useScroll();
@@ -320,6 +342,7 @@ const FeaturedProjectCard = (props: Props) => {
 							onMouseOver={() => setSnippetVideo(data?.gallery[0]?.asset?.playbackId)}
 							onMouseOut={() => setSnippetVideo(false)}
 							className="featured-project-card__title-wrapper"
+							$hasVisited={hasVisited && isRelatedProjects}
 						>
 							{data?.client && (
 								<Title

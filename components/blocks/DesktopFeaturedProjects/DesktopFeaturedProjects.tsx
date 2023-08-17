@@ -128,6 +128,7 @@ const DesktopFeaturedProjects = ({ data, isRelatedProjects = false }: Props) => 
 								fontSize={fontSize}
 								lineHeight={lineHeight}
 								setIsHovered={setIsHovered}
+								isRelatedProjects={isRelatedProjects}
 							/>
 						))}
 					</FeaturedProjectsList>
