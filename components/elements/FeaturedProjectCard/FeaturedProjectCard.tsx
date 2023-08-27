@@ -253,7 +253,6 @@ const FeaturedProjectCard = (props: Props) => {
 
 	function handleCardClick() {
 		sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-		console.log('Scroll position saved as ', window.scrollY.toString());
 	}	
 
 	const wrapperVariants = {

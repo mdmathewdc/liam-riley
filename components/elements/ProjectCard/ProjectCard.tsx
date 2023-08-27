@@ -157,6 +157,10 @@ const ProjectCard = (props: Props) => {
 		cursorRefresh();
 	}, []);
 
+	function handleCardClick() {
+		sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+	}	
+
 	return (
 		<ProjectCardWrapper
 			ref={ref}
@@ -168,7 +172,7 @@ const ProjectCard = (props: Props) => {
 					<LayoutGrid>
 						<ContentInner>
 							<Link href={`/projects/${slug}`} passHref scroll={false}>
-								<MobileMuxWrapper>
+								<MobileMuxWrapper onClick={handleCardClick}>
 									{gallery?.length > 0 && gallery[0]?.asset?.playbackId && (
 										<MuxPlayer
 											streamType="on-demand"

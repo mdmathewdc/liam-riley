@@ -94,6 +94,10 @@ const ProjectCardGallery = (props: Props) => {
 		rootMargin: '-50px'
 	});
 
+	function handleCardClick() {
+		sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+	}
+
 	return (
 		<ProjectCardGalleryWrapper
 			className={`gallery-wrapper view-element-left-right ${
@@ -108,6 +112,7 @@ const ProjectCardGallery = (props: Props) => {
 					<Embla
 						className="embla"
 						ref={emblaRef}
+						onClick={handleCardClick}
 					>
 						<EmblaContainer className="embla__container">
 							{gallerySlides.map((item, i) => (

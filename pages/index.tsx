@@ -33,9 +33,7 @@ const Page = (props: Props) => {
 	useEffect(() => {
         if (router.asPath === '/') {
             const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-			console.log('Saved scroll position is ',savedScrollPosition);
             if (savedScrollPosition) {
-				console.log('Scrolling now to ',savedScrollPosition,' and deleting...');
                 window.scrollTo(0, parseInt(savedScrollPosition, 10));
                 sessionStorage.removeItem('scrollPosition');
             }
