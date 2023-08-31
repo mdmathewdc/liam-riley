@@ -251,6 +251,10 @@ const FeaturedProjectCard = (props: Props) => {
 		['rotate(-1deg) translateX(0)', 'rotate(5deg) translateX(0)']
 	);
 
+	function handleCardClick() {
+		sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+	}	
+
 	const wrapperVariants = {
 		hidden: {
 			x: mouseXPosition,
@@ -310,7 +314,7 @@ const FeaturedProjectCard = (props: Props) => {
 						{formattedIndex}
 					</Index>
 					<Link href={`/projects/${data?.slug?.current}`} passHref scroll={false}>
-						<MobileSnippetWrapper>
+						<MobileSnippetWrapper onClick={handleCardClick}>
 							<MuxPlayer
 								streamType="on-demand"
 								playbackId={data?.gallery[0]?.asset?.playbackId}
@@ -328,6 +332,7 @@ const FeaturedProjectCard = (props: Props) => {
 							ref={ref}
 							onMouseOver={() => setSnippetVideo(data?.gallery[0]?.asset?.playbackId)}
 							onMouseOut={() => setSnippetVideo(false)}
+							onClick={handleCardClick}
 							className="featured-project-card__title-wrapper"
 						>
 							{data?.client && (

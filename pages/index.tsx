@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import client from '../client';
 import { ProjectsType, SiteSettingsType, Transitions } from '../shared/types/types';
 import Acknowledgement from '../components/blocks/Acknowledgement';
@@ -24,7 +26,19 @@ const Page = (props: Props) => {
 		lightColour,
 		featuredProjects,
 		pageTransitionVariants
-	} = props;
+	} = props;	
+
+	const router = useRouter();
+
+	useEffect(() => {
+        if (router.asPath === '/') {
+            const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+            if (savedScrollPosition) {
+                window.scrollTo(0, parseInt(savedScrollPosition, 10));
+                sessionStorage.removeItem('scrollPosition');
+            }
+        }
+    }, [router.asPath]);
 
 	return (
 		<PageWrapper

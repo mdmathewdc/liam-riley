@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import client from '../../client';
+import { useRouter } from 'next/router';
 import { ProjectsType, SiteSettingsType, Transitions } from '../../shared/types/types';
 import ProjectsTitle from '../../components/blocks/ProjectsTitle';
 import { NextSeo } from 'next-seo';
@@ -35,6 +36,7 @@ const Page = (props: Props) => {
 		pageTransitionVariants
 	} = props;
 
+	const router = useRouter();
 	const [windowHeight, setWindowHeight] = useState(0);
 	const [lastProjectId, setlastProjectId] = useState(initialLastProjectId);
 	const [paginatedProjects, setPaginatedProjects] = useState(projects);
@@ -146,6 +148,16 @@ const Page = (props: Props) => {
 			clearTimeout(timer);
 		}
 	}, []);
+
+	useEffect(() => {
+        if (router.asPath === '/projects') {
+            const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+            if (savedScrollPosition) {
+                window.scrollTo(0, parseInt(savedScrollPosition, 10));
+                sessionStorage.removeItem('scrollPosition');
+            }
+        }
+    }, [router.asPath]);
 
 	return (
 		<PageWrapper
