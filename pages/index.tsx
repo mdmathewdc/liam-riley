@@ -31,14 +31,14 @@ const Page = (props: Props) => {
 	const router = useRouter();
 
 	useEffect(() => {
-        if (router.asPath === '/') {
-            const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-            if (savedScrollPosition) {
-                window.scrollTo(0, parseInt(savedScrollPosition, 10));
-                sessionStorage.removeItem('scrollPosition');
-            }
-        }
-    }, [router.asPath]);
+		if (router.asPath === '/') {
+			const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+			if (savedScrollPosition) {
+				window.scrollTo(0, parseInt(savedScrollPosition, 10));
+				sessionStorage.removeItem('scrollPosition');
+			}
+		}
+	}, [router.asPath]);
 
 	return (
 		<PageWrapper
