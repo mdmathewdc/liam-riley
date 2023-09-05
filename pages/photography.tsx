@@ -18,8 +18,20 @@ const PhotographyWrapper = styled(motion.section)`
 	display: flex;
 	flex-wrap: wrap;
 	padding-top: var(--header-h);
-	height: calc(100vh - var(--header-h));
+	height: calc(100vh - var(--header-h) - 1px);
 	position: fixed;
+
+	::-webkit-scrollbar {
+		display: none !important;
+		opacity: 0 !important;
+	}
+
+	* {
+		::-webkit-scrollbar {
+			display: none !important;
+			opacity: 0 !important;
+		}
+	}
 `;
 
 const Photography = (props: Props) => {
