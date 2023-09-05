@@ -7,6 +7,7 @@ import ProjectContent from '../../components/blocks/ProjectContent';
 import { motion } from 'framer-motion';
 import DesktopFeaturedProjects from '../../components/blocks/DesktopFeaturedProjects';
 import { useEffect } from 'react';
+import ProjectImageGallery from '../../components/blocks/ProjectImageGallery';
 
 type Props = {
 	data: ProjectsType;
@@ -22,7 +23,7 @@ const Page = (props: Props) => {
 		data,
 		siteSettings,
 		pageTransitionVariants,
-		featuredProjects
+		// featuredProjects
 	} = props;
 
 	useEffect(() => {
@@ -53,10 +54,13 @@ const Page = (props: Props) => {
 				category={data?.category}
 				credits={data?.credits}
 			/>
-			<DesktopFeaturedProjects
+			<ProjectImageGallery
+				data={data?.imageGallery}
+			/>
+			{/* <DesktopFeaturedProjects
 				data={featuredProjects}
 				isRelatedProjects
-			/>
+			/> */}
 		</PageWrapper>
 	);
 };
@@ -81,8 +85,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
 	const projectsQuery = `
 		*[_type == 'projects' && slug.current == "${params.slug[0]}"][0] {
-			_id,
 			...,
+			imageGallery[] {
+				...,
+				_type == "image" => {
+					asset->
+				},
+			},
 		}
 	`;
 
@@ -92,32 +101,32 @@ export async function getStaticProps({ params }: any) {
 		}
 	`;
 
-	const featuredProjectsQuery = `
-		*[_type == "siteSettings"][0] {
-			featuredProjectsNew[]->{
-				_id,
-				title,
-				slug,
-				client,
-				gallery[] {
-					...,
-					_type == "snippetVideo" => {
-						asset->
-					},
-				}
-			}
-		}
-	`;
+	// const featuredProjectsQuery = `
+	// 	*[_type == "siteSettings"][0] {
+	// 		featuredProjectsNew[]->{
+	// 			_id,
+	// 			title,
+	// 			slug,
+	// 			client,
+	// 			gallery[] {
+	// 				...,
+	// 				_type == "snippetVideo" => {
+	// 					asset->
+	// 				},
+	// 			}
+	// 		}
+	// 	}
+	// `;
 
 	const data = await client.fetch(projectsQuery);
 	const siteSettings = await client.fetch(siteSettingsQuery);
-	let featuredProjects = await client.fetch(featuredProjectsQuery);
+	// let featuredProjects = await client.fetch(featuredProjectsQuery);
 
 	return {
 		props: {
 			data,
 			siteSettings,
-			featuredProjects: featuredProjects.featuredProjectsNew
+			// featuredProjects: featuredProjects.featuredProjectsNew
 		},
 	};
 }

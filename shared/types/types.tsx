@@ -82,4 +82,5 @@ export type ProjectsType = {
 	credits: [];
 	client: string;
 	category: string;
+	imageGallery: MediaType[];
 }
