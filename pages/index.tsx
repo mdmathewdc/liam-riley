@@ -40,9 +40,6 @@ const Page = (props: Props) => {
 		}
 	}, [router.asPath]);
 
-	console.log('data', data);
-	
-
 	return (
 		<PageWrapper
 			variants={pageTransitionVariants}
