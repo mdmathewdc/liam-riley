@@ -80,7 +80,6 @@ const ProfileImageWrapper = styled.div`
 		--media-object-position: center;
 		--controls: none;
 	}
-
 `;
 
 const MobileIntroTitle = styled.div`
