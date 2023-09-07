@@ -65,7 +65,7 @@ export type SiteSettingsType = {
 	email: string;
 	instagramUrl: string;
 	easterEggText: string;
-	profileImage: ImageType;
+	profileVid: VideoType;
 	showreelVid: VideoType;
 	footerCta: string;
 }

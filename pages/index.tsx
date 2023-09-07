@@ -40,6 +40,9 @@ const Page = (props: Props) => {
 		}
 	}, [router.asPath]);
 
+	console.log('data', data);
+	
+
 	return (
 		<PageWrapper
 			variants={pageTransitionVariants}
@@ -61,7 +64,7 @@ const Page = (props: Props) => {
 				paragraphThree={data.homePageParagraphThree}
 				title={data.homePageTitle}
 				showreelVideo={data.showreelVid}
-				profileImage={data.profileImage}
+				profileVideo={data.profileVid}
 				lightColour={lightColour}
 			/>
 			<DesktopFeaturedProjects
@@ -75,7 +78,7 @@ export async function getStaticProps() {
 	const siteSettingsQuery = `
 		*[_type == 'siteSettings'][0] {
 			...,
-			profileImage{asset->},
+			profileVid{asset->},
 			showreelVid{asset->}
 		}
 	`;
