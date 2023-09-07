@@ -40,6 +40,11 @@ const Heading = styled.h3`
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
 	}
+
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+	}
 `;
 
 const MobileIntroMuxWrapper = styled.div`
@@ -63,21 +68,17 @@ const ProfileVideoWrapper = styled.div`
 	grid-column: 1 / -1;
 	position: relative;
 	margin-bottom: ${pxToRem(20)};
+	padding-top: 56.25%;
 
 	mux-player {
-		height: ${pxToRem(664)};
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		inset: 0;
 
 		--media-object-fit: cover;
 		--media-object-position: center;
 		--controls: none;
-
-		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-			height: ${pxToRem(350)};
-		}
-
-		@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-			height: ${pxToRem(270)};
-		}
 	}
 
 `;
