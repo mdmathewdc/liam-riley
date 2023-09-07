@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { ImageType, VideoType } from '../../../shared/types/types';
+import { VideoType } from '../../../shared/types/types';
 import IntroAnimation from '../IntroAnimation';
 import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
 import MuxPlayer from '@mux/mux-player-react';
 import pxToRem from '../../../utils/pxToRem';
 import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
 
 type Props = {
 	paragraphOne: string;
@@ -14,7 +13,7 @@ type Props = {
 	paragraphThree: string;
 	title: string;
 	showreelVideo: VideoType;
-	profileImage: ImageType;
+	profileVideo: VideoType;
 	lightColour: string;
 };
 
@@ -64,7 +63,7 @@ const SubContent = styled.p`
 	}
 `;
 
-const ProfileImageWrapper = styled.div`
+const ProfileVideoWrapper = styled.div`
 	grid-column: 1 / -1;
 	position: relative;
 	margin-bottom: ${pxToRem(20)};
@@ -80,6 +79,7 @@ const ProfileImageWrapper = styled.div`
 		--media-object-position: center;
 		--controls: none;
 	}
+
 `;
 
 const MobileIntroTitle = styled.div`
@@ -117,7 +117,7 @@ const HomeProfile = (props: Props) => {
 		paragraphThree,
 		title,
 		showreelVideo,
-		profileImage,
+		profileVideo,
 		lightColour
 	} = props;
 
@@ -210,15 +210,23 @@ const HomeProfile = (props: Props) => {
 								{paragraphOne}
 							</Heading>
 						)}
-						{profileImage?.asset?.url && (
-							<ProfileImageWrapper
+						{profileVideo?.asset?.playbackId && (
+							<ProfileVideoWrapper
 								className={`view-element-bottom-top ${
 									inView2 ? 'view-element-bottom-top--in-view' : ''
 								}`}
 								ref={ref2}
 							>
-								<Image src={profileImage.asset.url} layout="fill" objectFit="cover" />
-							</ProfileImageWrapper>
+								<MuxPlayer
+									streamType="on-demand"
+									playbackId={profileVideo.asset.playbackId}
+									autoPlay="muted"
+									loop={true}
+									thumbnailTime={0}
+									muted={true}
+									playsInline={true}
+								/>
+							</ProfileVideoWrapper>
 						)}
 						{paragraphTwo && (
 							<Heading
