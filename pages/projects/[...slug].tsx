@@ -31,6 +31,7 @@ const Page = (props: Props) => {
 		const projectsVisited = JSON.parse(localStorage.getItem('projects-visited') || '[]');
 		projectsVisited.push(title);
 		localStorage.setItem('projects-visited', JSON.stringify(projectsVisited));
+		window.scrollTo(0, 0);
 	}, []);
 
 	return (
