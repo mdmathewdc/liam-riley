@@ -61,7 +61,7 @@ const Page = (props: Props) => {
 				paragraphThree={data.homePageParagraphThree}
 				title={data.homePageTitle}
 				showreelVideo={data.showreelVid}
-				profileVideo={data.profileVid}
+				profileImage={data.profileImage}
 				lightColour={lightColour}
 			/>
 			<DesktopFeaturedProjects
@@ -75,7 +75,7 @@ export async function getStaticProps() {
 	const siteSettingsQuery = `
 		*[_type == 'siteSettings'][0] {
 			...,
-			profileVid{asset->},
+			profileImage{asset->},
 			showreelVid{asset->}
 		}
 	`;
