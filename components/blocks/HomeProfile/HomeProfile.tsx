@@ -40,6 +40,11 @@ const Heading = styled.h3`
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
 	}
+
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+	}
 `;
 
 const MobileIntroMuxWrapper = styled.div`
@@ -62,9 +67,20 @@ const SubContent = styled.p`
 const ProfileImageWrapper = styled.div`
 	grid-column: 1 / -1;
 	position: relative;
-	height: ${pxToRem(664)};
-	width: 100%;
-	margin-bottom: ${pxToRem(24)};
+	margin-bottom: ${pxToRem(20)};
+	padding-top: 56.25%;
+
+	mux-player {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		inset: 0;
+
+		--media-object-fit: cover;
+		--media-object-position: center;
+		--controls: none;
+	}
+
 `;
 
 const MobileIntroTitle = styled.div`
