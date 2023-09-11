@@ -45,7 +45,7 @@ export default class CustomDocument extends Document {
 					openGraph={{
 						images: [
 							{
-								url: '/file-path.jpg',
+								url: '/liamriley-og.jpg',
 								width: 1200,
 								height: 630,
 							},
