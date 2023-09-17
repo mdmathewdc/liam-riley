@@ -151,16 +151,6 @@ const Page = (props: Props) => {
 		}
 	}, []);
 
-	useEffect(() => {
-        if (router.asPath === '/projects') {
-            const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-            if (savedScrollPosition) {
-                window.scrollTo(0, parseInt(savedScrollPosition, 10));
-                sessionStorage.removeItem('scrollPosition');
-            }
-        }
-    }, [router.asPath]);
-
 	return (
 		<PageWrapper
 			variants={pageTransitionVariants}
