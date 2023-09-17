@@ -140,6 +140,8 @@ const Page = (props: Props) => {
 		const timer = setTimeout(() => {
 			setIsFirstRender(false);
 		}, 1000);
+
+		window.scrollTo(0, 0);
 	
 		return () => {
 			window.removeEventListener('resize', () => {
