@@ -40,18 +40,8 @@ export default class CustomDocument extends Document {
 					<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
 					<meta name="msapplication-TileColor" content="#da532c" />
 					<meta name="theme-color" content="#ffffff" />
+					<meta property="og:image" content="/ogg-image.jpg" />
 				</Head>
-				<NextSeo
-					openGraph={{
-						images: [
-							{
-								url: '/liamriley-og.jpg',
-								width: 1200,
-								height: 630,
-							},
-						],
-					}}
-				/>
 				<body>
 					<Main />
 					<NextScript />
